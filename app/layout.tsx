@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio2026.vercel.app"),
+  metadataBase: new URL("https://portfolio-gamma-lemon-74.vercel.app"),
   title: "Raphael Martins · Desenvolvedor Full-stack",
   description:
     "Desenvolvedor full-stack focado em aplicações web para a construção civil. Criador dos sistemas Audit BIM, Edifica e Databook.",
