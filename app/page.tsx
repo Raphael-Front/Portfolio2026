@@ -86,6 +86,11 @@ type CaseData = {
   phone: ReactNode;
   /** tela do celular na proporção do print (em vez de 9/18.5) */
   phoneFit?: boolean;
+  /** métricas de impacto do projeto (bloco "Impacto" + tooltip "i") */
+  stats?: {
+    headline: { value: string; label: string }[];
+    detail?: { title: string; rows: { value: string; label: string }[] };
+  };
   diffs: Diff[];
   flow: string[];
   /** stacks principais exibidas no rodapé (mesma quantidade em todos os cards) */
@@ -138,6 +143,21 @@ const projetos: CaseData[] = [
     name: "Edifica",
     order: 1,
     sub: "Diário de obra e folha, integrados ao ERP",
+    stats: {
+      headline: [
+        { value: "R$ 2M+", label: "em folha geridos" },
+        { value: "7", label: "obras integradas" },
+        { value: "2.628", label: "pageviews / mês" },
+      ],
+      detail: {
+        title: "Como foi em julho",
+        rows: [
+          { value: "2.628", label: "pageviews" },
+          { value: "239", label: "sessões" },
+          { value: "25", label: "visitantes únicos" },
+        ],
+      },
+    },
     brand: "#1e3a5f",
     sBg: "#f4f6f8",
     logo: LogoBuildings,
@@ -224,6 +244,29 @@ function ProjectCase({ c }: { c: CaseData }) {
         <div className="phone2"><div className="pbody"><div className={c.phoneFit ? "phscreen fit" : "phscreen"}>{c.phone}</div></div></div>
       </div>
       <div className="c2detail">
+        {c.stats ? (
+          <div className="impact">
+            <div className="ihead">
+              <span className="t">Impacto</span>
+              {c.stats.detail ? (
+                <span className="info">
+                  <button type="button" aria-label={c.stats.detail.title}>i</button>
+                  <span className="tip" role="tooltip">
+                    <span className="tt">{c.stats.detail.title}</span>
+                    {c.stats.detail.rows.map((r) => (
+                      <span className="tr" key={r.label}><b>{r.value}</b><span>{r.label}</span></span>
+                    ))}
+                  </span>
+                </span>
+              ) : null}
+            </div>
+            <div className="stat-row">
+              {c.stats.headline.map((s) => (
+                <div className="stat" key={s.label}><b>{s.value}</b><span>{s.label}</span></div>
+              ))}
+            </div>
+          </div>
+        ) : null}
         <div>
           <div className="lab">Diferenciais</div>
           <div className="diffs">
