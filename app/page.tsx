@@ -88,7 +88,12 @@ type CaseData = {
   phoneFit?: boolean;
   diffs: Diff[];
   flow: string[];
+  /** stacks principais exibidas no rodapé (mesma quantidade em todos os cards) */
   stack: string[];
+  /** total de tecnologias notáveis do projeto (para o chip "+N") */
+  stackTotal?: number;
+  /** ordem de exibição do card */
+  order?: number;
   result: string;
 };
 
@@ -96,6 +101,7 @@ const projetos: CaseData[] = [
   {
     code: "A-01 · Auditoria de projetos",
     name: "Audit BIM",
+    order: 3,
     sub: "Auditoria de projetos BIM, da planilha ao sistema",
     brand: "#7180ff",
     sBg: "#f5f5f7",
@@ -123,12 +129,14 @@ const projetos: CaseData[] = [
       "Stand-by: vincula IDs do Construflow",
       "Conclui e gera relatório + indicadores",
     ],
-    stack: ["Next.js 15", "Prisma", "Supabase", "TanStack Query", "Recharts", "jsPDF"],
+    stack: ["Next.js 15", "Supabase", "Prisma", "TanStack Query", "Zustand", "Recharts"],
+    stackTotal: 25,
     result: "Fim da planilha: auditoria rastreável de ponta a ponta",
   },
   {
     code: "A-02 · Gestão de obras",
     name: "Edifica",
+    order: 1,
     sub: "Diário de obra e folha, integrados ao ERP",
     brand: "#1e3a5f",
     sBg: "#f4f6f8",
@@ -156,12 +164,14 @@ const projetos: CaseData[] = [
       "Dupla aprovação: Planej. + Coord.",
       "Envia lançamentos ao ERP UAU",
     ],
-    stack: ["Next.js 15", "Supabase", "Edge Functions", "Azure AD", "Upstash", "Sentry"],
+    stack: ["Next.js 15", "React 19", "Supabase", "Prisma", "ERP UAU", "TanStack Query"],
+    stackTotal: 28,
     result: "Da frente de obra ao ERP, sem digitação dupla",
   },
   {
     code: "A-03 · Gestão do SGQ",
     name: "Databook",
+    order: 2,
     sub: "Documentação técnica e laudos rastreáveis",
     brand: "#4E77A8",
     sBg: "#eef2f6",
@@ -190,7 +200,8 @@ const projetos: CaseData[] = [
       "SGQ aprova ou reprova com motivo",
       "Arquiva, notifica e trava edição",
     ],
-    stack: ["Next.js 15", "Supabase (RLS)", "Azure AD", "PostHog", "Vercel"],
+    stack: ["Next.js 15", "React 19", "Supabase (RLS)", "Azure AD (SSO)", "PostHog", "TypeScript"],
+    stackTotal: 12,
     result: "Documentação técnica auditável, sem SharePoint",
   },
 ];
@@ -203,9 +214,7 @@ function ProjectCase({ c }: { c: CaseData }) {
         <div className="who">
           <h3>{c.name}</h3>
           <span className="sub">{c.sub}</span>
-          <span className="code">{c.code}</span>
         </div>
-        <span className="flag">Projeto interno</span>
       </div>
       <div className="showcase">
         <div className="monitor">
@@ -238,7 +247,12 @@ function ProjectCase({ c }: { c: CaseData }) {
           </div>
         </div>
         <div className="c2foot">
-          <div className="tags">{c.stack.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+          <div className="tags">
+            {c.stack.map((t) => <span className="tag" key={t}>{t}</span>)}
+            {c.stackTotal && c.stackTotal > c.stack.length ? (
+              <span className="tag more">+{c.stackTotal - c.stack.length}</span>
+            ) : null}
+          </div>
           <span className="result">{c.result}</span>
         </div>
       </div>
@@ -318,7 +332,9 @@ export default function Home() {
         <section id="projetos">
           <div className="shead"><span className="no">03</span><h2>Projetos</h2></div>
           <div className="cases">
-            {projetos.map((c) => <ProjectCase c={c} key={c.code} />)}
+            {[...projetos]
+              .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
+              .map((c) => <ProjectCase c={c} key={c.name} />)}
           </div>
         </section>
 
