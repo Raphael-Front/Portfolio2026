@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import ClientEnhancements from "@/components/ClientEnhancements";
+import CursorReticle from "@/components/CursorReticle";
 
 type CSSVars = CSSProperties & Record<string, string>;
 
@@ -401,6 +402,7 @@ export default function Home() {
       </div>
 
       <ClientEnhancements />
+      <CursorReticle />
     </div>
   );
 }
