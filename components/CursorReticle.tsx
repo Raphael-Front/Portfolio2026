@@ -67,8 +67,8 @@ export default function CursorReticle() {
       if (shown) writeCoord();
     };
 
-    // seletor dos alvos "mira"
-    const interactive = "a, button, .case2, .stat, .diff, .col, [data-cursor]";
+    // seletor dos alvos "mira": só elementos clicáveis (top bar, contato, botões)
+    const interactive = "a, button, [data-cursor]";
     const onOver = (e: PointerEvent) => {
       if ((e.target as Element)?.closest?.(interactive)) {
         ring.classList.add("is-hover");
