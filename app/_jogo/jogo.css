@@ -72,6 +72,13 @@
 .jg-skills{list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 0; padding:18px 0 0; border-top:2px dashed rgba(255,255,255,.12)}
 .jg-skills li{font:800 12px var(--mono); letter-spacing:.06em; color:#fff; padding:5px 10px; border:2px solid var(--acc); background:color-mix(in srgb, var(--acc) 16%, transparent)}
 .jg-skills i{font-style:normal; color:var(--acc); margin-right:6px}
+.jg-skills li.is-mais{color:#c6cfdf; border-style:dashed; background:none; animation:jg-chip .3s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(var(--i,0) * 25ms)}
+@keyframes jg-chip{from{transform:scale(.6); opacity:0}}
+.jg-skills li:has(> .jg-mais){padding:0; border:0; background:none}
+.jg-mais{font:800 12px var(--mono); letter-spacing:.06em; color:var(--acc); background:none; border:2px dashed var(--acc); padding:5px 10px; cursor:pointer}
+.jg-mais:hover{background:color-mix(in srgb, var(--acc) 16%, transparent)}
+.jg-window .jg-skills{margin-top:6px}
+@media (prefers-reduced-motion:reduce){ .jg-skills li.is-mais{animation:none} }
 /* o card fica apoiado no piso da fase */
 .jg-floor{height:48px; margin:0 -24px; background-repeat:repeat-x; background-position:left top; image-rendering:pixelated}
 @media (max-width:700px){
@@ -132,7 +139,7 @@ html:has(.jg)::-webkit-scrollbar-button{display:none}
 
 /* entradas ao rolar */
 @media (prefers-reduced-motion:no-preference){
-  .jg-rv{opacity:0; transform:translateY(24px); transition:opacity .55s ease, transform .55s cubic-bezier(.2,.8,.2,1); transition-delay:calc(var(--i,0) * 110ms)}
+  .jg-rv{opacity:0; transform:translateY(24px); transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); transition-delay:calc(var(--i,0) * 70ms)}
   .jg-list li.jg-rv{transform:translateX(-16px)}
   .jg-skills li.jg-rv{transform:scale(.5); transition-timing-function:ease, cubic-bezier(.3,1.7,.5,1)}
   .jg-rv.is-in, .jg-list li.jg-rv.is-in, .jg-skills li.jg-rv.is-in{opacity:1; transform:none}
@@ -150,7 +157,6 @@ html:has(.jg)::-webkit-scrollbar-button{display:none}
 .jg-cols li{position:relative; padding-left:22px}
 .jg-dores li::before{content:""; position:absolute; left:0; top:.62em; width:10px; height:2px; background:#ff6b6b}
 .jg-wins li::before{content:""; position:absolute; left:1px; top:.32em; width:10px; height:5px; border-left:2px solid #4fd16b; border-bottom:2px solid #4fd16b; transform:rotate(-45deg)}
-.jg-stack{font:12px var(--mono); color:var(--mut); margin:0}
 .jg-end{padding:10vh 24px 16vh; text-align:center; font:12px var(--mono); color:var(--mut)}
 @media (max-width:700px){ .jg-cols{grid-template-columns:1fr} }
 
@@ -163,6 +169,19 @@ html:has(.jg)::-webkit-scrollbar-button{display:none}
 .jg-hearts i{font-style:normal; color:#3a2430}
 .jg-zone{color:var(--gold); margin-left:auto}
 .jg-hud button{font:800 12px var(--mono); background:var(--line); color:var(--ink); border:0; padding:6px 10px; cursor:pointer}
+.jg-hud b{font-weight:inherit}
+/* celular: placar numa linha só, sem rótulos de teclado nem nome da zona */
+@media (max-width:600px){
+  .jg-hud{top:8px; left:8px; right:8px; gap:10px; flex-wrap:nowrap; font-size:11px; letter-spacing:.04em; padding:6px 8px}
+  .jg-hearts{font-size:15px}
+  .jg-zone{display:none}
+  .jg-hud button{font-size:10px; padding:5px 7px; white-space:nowrap}
+  .jg-hud button:first-of-type{margin-left:auto}
+  .jg-toast{top:52px}
+  .jg-toast span{font-size:14px}
+}
+@media (max-width:360px){ .jg-lbl{display:none} }
+@media (pointer:coarse){ .jg-hint{display:none} }
 .jg-toast{position:absolute; top:70px; left:50%; transform:translateX(-50%); z-index:2; display:grid; gap:4px; min-width:min(420px,92vw);
   background:#0b1222; border:2px solid var(--gold); box-shadow:4px 4px 0 #05080f; padding:10px 16px; animation:jg-pop .25s ease-out}
 .jg-toast b{font:800 11px var(--mono); letter-spacing:.14em; color:var(--gold)}

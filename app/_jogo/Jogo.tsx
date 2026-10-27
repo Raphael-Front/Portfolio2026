@@ -10,53 +10,61 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createSom, type Som } from "./som";
-import Leitura, { CONTATOS } from "./Leitura";
+import Leitura, { CONTATOS, Stack } from "./Leitura";
 import Player from "./Player";
 
 /* ---------------- conteúdo ---------------- */
-export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[] };
+export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[] };
+// stack: destaques na ordem código, integração/ERP, acesso, banco (e RLS); stackMais: o resto, aberto pelo "+N".
+// Levantado dos repositórios em 27/10/2026.
 const CASES: Case[] = [
   {
     key: "audit", kicker: "GPL Incorporadora · BIM", title: "Audit BIM",
     ideia: "Auditoria de modelos BIM por disciplina, com checklist, não conformidades rastreadas até a correção e score de qualidade por projeto.",
     dores: ["Auditoria feita em planilha, item a item", "Não conformidade apontada e esquecida, sem vínculo com a correção", "Ninguém sabia o nível de qualidade real de cada projeto"],
     impactos: ["A auditoria saiu da planilha e virou um fluxo guiado", "Cada NC fica ligada à correção no Construflow", "A qualidade do modelo virou um score comparável"],
-    stack: ["Next.js", "Supabase", "Prisma"],
+    stack: ["Next.js 15", "TypeScript", "Azure AD", "Supabase", "RLS"],
+    stackMais: ["React 19", "Tailwind CSS 4", "TanStack Query", "Zustand", "React Hook Form", "Zod", "Recharts", "jsPDF", "Construflow", "Vercel", "GitHub Actions"],
   },
   {
     key: "edifica", kicker: "GPL Incorporadora · Obra", title: "Edifica",
     ideia: "Diário de obra pensado para o tablet, que também funciona no celular, e folha de pagamento das equipes integrada aos ERPs, com dupla aprovação antes de ir para o sistema.",
     dores: ["Diários de obra num sistema externo, com pouco controle", "Folha enviada colaborador por colaborador, num app do Power Apps", "Pouco rastreio do que foi produzido em relação ao que foi pago", "Quase nenhum relatório de folha, e indicadores fracos sobre os diários"],
     impactos: ["R$ 2,5M+ em folha geridos", "9 obras integradas", "Integração de ponta a ponta com 2 ERPs: UAU e ALMOB", "Relatórios com indicadores diferentes, para ver só o que importa", "Em média, por mês: 4.861 visualizações, 638 acessos e 67 pessoas usando"],
-    stack: ["React", "ERP UAU", "TypeScript"],
+    stack: ["Next.js 15", "TypeScript", "ERP UAU", "ALMOB", "Azure AD", "Supabase", "RLS"],
+    stackMais: ["React 19", "Tailwind CSS 4", "shadcn/ui", "TanStack Query", "React Hook Form", "Zod", "Recharts", "visx", "GSAP", "dnd-kit", "jsPDF", "xlsx", "Microsoft Graph", "Discord", "Supabase Edge Functions", "Supabase Storage", "Upstash Redis", "GlitchTip", "PostHog", "Playwright", "Vercel Cron", "GitHub Actions", "AES-256-GCM (LGPD)"],
   },
   {
     key: "databook", kicker: "GPL Incorporadora · Qualidade", title: "Databook", badge: "Em desenvolvimento",
     ideia: "Laudos e ensaios num lugar só, com revisões preservadas e aprovação do SGQ com trilha de auditoria.",
     dores: ["Laudos espalhados em pastas, difíceis de achar na entrega", "Versões sobrescritas, sem histórico", "Aprovação do SGQ sem trilha de auditoria"],
     impactos: ["Documentação pronta para a entrega da obra", "Cada revisão preservada, sem sobrescrever", "Aprovado não se edita mais"],
-    stack: ["Azure AD", "RLS", "PostgreSQL"],
+    stack: ["Next.js 15", "TypeScript", "Azure AD", "Supabase", "RLS"],
+    stackMais: ["React 19", "Tailwind CSS", "Supabase Storage", "Resend", "PostHog", "Vercel", "GitHub Actions"],
   },
   {
     key: "tempus", kicker: "GPL Incorporadora · RH", title: "Tempus",
     ideia: "Portal de ponto: cada colaborador acompanha o próprio ponto no dia a dia e pede ajustes num fluxo formal, com aprovação do gestor.",
     dores: ["Batida faltando e saldo negativo só apareciam no fechamento", "Ajustes pedidos por WhatsApp e e-mail, sem trilha", "O DP virava gargalo de toda correção"],
     impactos: ["O colaborador vê o próprio saldo todo dia, não só no fechamento", "Ajuste de ponto vira solicitação formal, com aprovação do gestor", "Trilha imutável: a marcação original do relógio nunca é alterada"],
-    stack: ["Next.js", "SQL Server", "Docker"],
+    stack: ["Next.js 16", "TypeScript", "Secullum Ponto4", "Azure AD", "Supabase", "SQL Server", "RLS"],
+    stackMais: ["React 19", "Tailwind CSS 4", "Vitest", "Docker", "GHCR", "IIS", "GitHub Actions"],
   },
   {
     key: "hub", kicker: "GPL Incorporadora · DevOps", title: "HUB",
     ideia: "Painel que acompanha todos os repositórios do time: PRs, branches paradas e padrões de CI, com um botão que abre a correção sozinho.",
     dores: ["PRs esquecidas por dias sem review", "Cada repositório com um padrão diferente de CI e release", "Ninguém via o estado do time inteiro numa tela só"],
     impactos: ["O estado de todos os repositórios numa tela só", "Cada PR ganha uma nota de S a D e entra numa fila de review", "Padrão fora do lugar se corrige com um clique, que abre a PR"],
-    stack: ["GitHub API", "GitHub Actions", "Discord"],
+    stack: ["JavaScript", "GitHub API", "Discord", "GitHub Actions"],
+    stackMais: ["HTML/CSS", "Node.js", "GraphQL", "GitHub Pages"],
   },
   {
     key: "partietta", kicker: "Projeto pessoal · Games", title: "Partietta", badge: "Em desenvolvimento",
     ideia: "Plataforma para encontrar parceiros de jogo por compatibilidade explicável: você vê quanto cada critério pesou no match. Para jogadores maiores de 18 anos.",
     dores: ["Achar gente compatível para jogar é pura sorte", "Matchmaking caixa-preta, sem explicar o porquê", "Grupos que não fecham por falta de canal de voz"],
     impactos: ["Match explicado: 9 critérios com pesos que dá para conferir", "Party com call temporária no Discord, criada na hora", "Conexões com moderação e público só de maiores de 18"],
-    stack: ["Next.js", "Drizzle", "Jotai", "shadcn/ui"],
+    stack: ["Next.js 16", "TypeScript", "Discord API", "Supabase Auth", "Supabase", "RLS"],
+    stackMais: ["React 19", "Tailwind CSS 4", "shadcn/ui", "Jotai", "Zod", "Google OAuth", "Supabase Storage", "GlitchTip", "Playwright", "Vercel Cron", "GitHub Actions"],
   },
 ];
 const ALL_SKILLS = [...new Set(CASES.flatMap((c) => c.stack))];
@@ -252,6 +260,7 @@ export default function Jogo() {
     for (const f of FASES) { load(`${f.id}/fundo`, `/jogo/${f.id}/fundo.webp`); load(`hero/${f.hero}`, `/jogo/${f.hero}.png`); }
 
     let L = buildLevel(innerWidth);
+    const touch = matchMedia("(pointer: coarse)").matches;
     const pl = { x: L.spawns[0].x, y: L.spawns[0].y, vx: 0, vy: 0, face: 1, ground: null as Plat | null, jumps: 0, drop: 0, punch: 0, hurt: 0, anim: "idle", t: 0, still: 0 };
     let hearts = 3, got = 0, camY = 0, last = performance.now(), raf = 0;
     let hits = 0, kills = 0, finished = false;
@@ -392,7 +401,9 @@ export default function Jogo() {
       pl.anim = pl.punch > 0 ? "punch" : !pl.ground ? "jump" : dir ? "run" : "idle";
       pl.t += dt;
       pl.still = pl.ground && !dir ? pl.still + dt : 0;
-      const target = Math.max(0, Math.min(L.worldH - innerHeight, pl.y - innerHeight * 0.55));
+      // toque: os botões ocupam o rodapé, então a câmera mostra o personagem mais alto e o mundo rola um pouco além do fim
+      const pad = touch ? 96 : 0;
+      const target = Math.max(0, Math.min(L.worldH - innerHeight + pad, pl.y - innerHeight * (touch ? 0.45 : 0.55)));
       camY += (target - camY) * Math.min(1, dt * 6);
     };
 
@@ -580,7 +591,7 @@ export default function Jogo() {
         </p>
         <p className="jg-help">← → anda · espaço pula (2× no ar) · ↓ desce (atravessa o chão) · ↑ entra na porta · X soca · Esc sai</p>
         </div>
-        <Player />
+        <Player skills={ALL_SKILLS.length} />
       </header>
 
       <Leitura cases={CASES} onPlay={() => { setPlaying(true); setIntro(firstTime()); }} />
@@ -590,11 +601,11 @@ export default function Jogo() {
           <canvas ref={canvas} className="jg-canvas" aria-hidden="true" />
           <div className="jg-hud" role="status">
             <span className="jg-hearts" aria-label={`${hud.hearts} vidas`}>{"♥".repeat(hud.hearts)}<i>{"♥".repeat(3 - hud.hearts)}</i></span>
-            <span>ITENS {hud.items}/{hud.total}</span>
-            <span>SKILLS {hud.skills}/{ALL_SKILLS.length}</span>
+            <span><b className="jg-lbl">ITENS </b>{hud.items}/{hud.total}</span>
+            <span><b className="jg-lbl">SKILLS </b>{hud.skills}/{ALL_SKILLS.length}</span>
             <span className="jg-zone">{hud.zone}</span>
-            <button type="button" onClick={toggleMute} aria-pressed={muted}>{muted ? "SOM: OFF" : "SOM: ON"} (M)</button>
-            <button type="button" onClick={() => setPlaying(false)}>SAIR (Esc)</button>
+            <button type="button" onClick={toggleMute} aria-pressed={muted}>{muted ? "SOM: OFF" : "SOM: ON"}<span className="jg-hint"> (M)</span></button>
+            <button type="button" onClick={() => setPlaying(false)}>SAIR<span className="jg-hint"> (Esc)</span></button>
           </div>
           {toast && (
             <div className="jg-toast" key={toast.k} role="status">
@@ -680,7 +691,7 @@ function CaseBody({ c, as: Tag, titleId }: { c: Case; as: "article" | "div"; tit
         <div><h3>Por que existe</h3><ul className="jg-dores">{c.dores.map((d) => <li key={d}>{d}</li>)}</ul></div>
         <div><h3>{c.badge ? "O que vai mudar" : "Impacto"}</h3><ul className="jg-wins">{c.impactos.map((d) => <li key={d}>{d}</li>)}</ul></div>
       </div>
-      <p className="jg-stack">{c.stack.join(" · ")}</p>
+      <Stack c={c} />
     </Tag>
   );
 }

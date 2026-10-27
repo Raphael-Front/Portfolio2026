@@ -22,6 +22,29 @@ export const CONTATOS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/raphael-martins-47604a381" },
 ];
 
+// stack do projeto: destaques primeiro e um "+N" que abre o resto
+export function Stack({ c, reveal }: { c: Case; reveal?: boolean }) {
+  const [aberta, setAberta] = useState(false);
+  const rv = reveal ? "jg-rv" : "";
+  return (
+    <ul className="jg-skills" aria-label="Stack">
+      {c.stack.map((s, j) => (
+        <li key={s} className={rv} style={{ "--i": j + 2 } as CSSProperties}><i aria-hidden="true">+</i>{s}</li>
+      ))}
+      {aberta && c.stackMais.map((s, j) => (
+        <li key={s} className="is-mais" style={{ "--i": j } as CSSProperties}>{s}</li>
+      ))}
+      {c.stackMais.length > 0 && (
+        <li className={rv} style={{ "--i": c.stack.length + 2 } as CSSProperties}>
+          <button type="button" className="jg-mais" aria-expanded={aberta} onClick={() => setAberta(!aberta)}>
+            {aberta ? "− menos" : `+${c.stackMais.length}`}
+          </button>
+        </li>
+      )}
+    </ul>
+  );
+}
+
 export default function Leitura({ cases, onPlay }: { cases: Case[]; onPlay: () => void }) {
   const root = useRef<HTMLElement>(null);
   const [ativa, setAtiva] = useState(0);
@@ -41,7 +64,7 @@ export default function Leitura({ cases, onPlay }: { cases: Case[]; onPlay: () =
     // revela itens ao entrar na tela (uma vez)
     const rv = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) { e.target.classList.add("is-in"); rv.unobserve(e.target); }
-    }), { rootMargin: "0px 0px -12% 0px" });
+    }), { rootMargin: "0px 0px -4% 0px" });
     el.querySelectorAll(".jg-rv").forEach((n) => rv.observe(n));
     // fase ativa = seção que cruza o meio da tela; troca o cenário de fundo
     const fs = new IntersectionObserver((es) => es.forEach((e) => {
@@ -103,11 +126,7 @@ export default function Leitura({ cases, onPlay }: { cases: Case[]; onPlay: () =
                       </ul>
                     </div>
                   </div>
-                  <ul className="jg-skills" aria-label="Stack">
-                    {c.stack.map((s, j) => (
-                      <li key={s} className="jg-rv" style={{ "--i": j + 2 } as CSSProperties}><i aria-hidden="true">+</i>{s}</li>
-                    ))}
-                  </ul>
+                  <Stack c={c} reveal />
                 </article>
                 <div className="jg-floor" style={{ backgroundImage: `url(${src(f.chao)})` }} aria-hidden="true" />
               </div>

@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 const W = 440, H = 540;
 const STEPS = [44, 30, 20, 14, 10, 7, 5, 3, 2, 1]; // tamanho do pixel em cada quadro da entrada
 
-export default function Player() {
+export default function Player({ skills }: { skills: number }) {
   const cv = useRef<HTMLCanvasElement>(null);
   const draw = useRef<(px: number) => void>(() => {});
 
@@ -46,7 +46,7 @@ export default function Player() {
         <div><dt>Classe</dt><dd>Dev full-stack</dd></div>
         <div><dt>Base</dt><dd>Goiânia GO</dd></div>
         <div><dt>Foco</dt><dd>Construção civil</dd></div>
-        <div><dt>Skills</dt><dd>17</dd></div>
+        <div><dt>Skills</dt><dd>{skills}</dd></div>
       </dl>
     </figure>
   );
