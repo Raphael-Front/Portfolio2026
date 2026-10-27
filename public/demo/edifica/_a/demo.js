@@ -39,12 +39,41 @@
     return false;
   }
 
+  // tela estreita: o menu lateral do Edifica começa fechado e abre pelo botão do topo
+  var estreita = window.matchMedia("(max-width: 1023px)").matches;
+  var lateral = document.querySelector("aside.fixed");
+  if (estreita && lateral) {
+    lateral.style.transform = "translateX(-100%)";
+    lateral.style.transition = "transform .25s ease";
+  }
+  var dialogo = document.querySelector("dialog[aria-label]");
+  function menuCelular(btn) {
+    var rot = btn.getAttribute("aria-label") || "";
+    if (/^Abrir menu/.test(rot) && dialogo) { dialogo.showModal(); return true; }
+    if (rot === "Fechar menu" && dialogo) { dialogo.close(); return true; }
+    if (rot === "Recolher menu" && lateral && estreita) {
+      lateral.style.transform = lateral.style.transform ? "" : "translateX(-100%)";
+      return true;
+    }
+    return false;
+  }
+  // faixa da demo cabe no celular
+  var faixa = document.getElementById("demo-banner");
+  if (faixa && window.innerWidth < 600) {
+    faixa.children[1] && faixa.children[1].remove();
+    faixa.style.whiteSpace = "nowrap"; faixa.style.fontSize = "12px";
+  }
+
   document.addEventListener("click", function (e) {
+    // menu aberto no celular: tocar fora dele fecha
+    if (estreita && lateral && !lateral.style.transform && !e.target.closest("aside")) {
+      lateral.style.transform = "translateX(-100%)"; e.preventDefault(); return;
+    }
     var a = e.target.closest("a[data-demo-off]");
     var b = e.target.closest("button, [role=button], select, input[type=checkbox], label");
     if (a) { e.preventDefault(); aviso("Esta tela não faz parte da demonstração."); return; }
     if (!b || b.closest("#demo-banner")) return;
-    if (b.tagName === "BUTTON" && destino(b)) { e.preventDefault(); return; }
+    if (b.tagName === "BUTTON" && (menuCelular(b) || destino(b))) { e.preventDefault(); return; }
     e.preventDefault();
     aviso("Demonstração com dados fictícios: ações e filtros estão desligados.");
   }, true);

@@ -47,7 +47,7 @@ const CASES: Case[] = [
     stackMais: ["React 19", "Tailwind CSS", "Supabase Storage", "Resend", "PostHog", "Vercel", "GitHub Actions"],
   },
   {
-    key: "tempus", kicker: "GPL Incorporadora · RH", title: "Tempus",
+    key: "tempus", kicker: "GPL Incorporadora · RH", title: "Tempus", demo: "/demo/tempus/index.html",
     ideia: "Portal de ponto: cada colaborador acompanha o próprio ponto no dia a dia e pede ajustes num fluxo formal, com aprovação do gestor.",
     dores: ["Batida faltando e saldo negativo só apareciam no fechamento", "Ajustes pedidos por WhatsApp e e-mail, sem trilha", "O DP virava gargalo de toda correção"],
     impactos: ["O colaborador vê o próprio saldo todo dia, não só no fechamento", "Ajuste de ponto vira solicitação formal, com aprovação do gestor", "Trilha imutável: a marcação original do relógio nunca é alterada"],
