@@ -214,7 +214,9 @@ export default function Jogo() {
   // abrir o case pausa o jogo; fechar devolve
   useEffect(() => {
     paused.current = !!open || intro || !!result;
-    if (open) closeBtn.current?.focus(); else if (intro) startBtn.current?.focus(); else if (result) resultBtn.current?.focus();
+    // foco sem rolar: o botão fica no fim da janela, e a janela deve abrir mostrando o topo
+    const btn = open ? closeBtn.current : intro ? startBtn.current : result ? resultBtn.current : null;
+    btn?.focus({ preventScroll: true }); btn?.closest(".jg-window")?.scrollTo(0, 0);
     som.current?.duck(!!open || intro || !!result); // música baixa com o jogo pausado
     if (wasOpen.current && !open) som.current?.sfx("close");
     wasOpen.current = !!open;
@@ -402,7 +404,7 @@ export default function Jogo() {
       pl.t += dt;
       pl.still = pl.ground && !dir ? pl.still + dt : 0;
       // toque: os botões ocupam o rodapé, então a câmera mostra o personagem mais alto e o mundo rola um pouco além do fim
-      const pad = touch ? 96 : 0;
+      const pad = touch ? 150 : 0;
       const target = Math.max(0, Math.min(L.worldH - innerHeight + pad, pl.y - innerHeight * (touch ? 0.45 : 0.55)));
       camY += (target - camY) * Math.min(1, dt * 6);
     };
@@ -667,13 +669,21 @@ export default function Jogo() {
             <div className="jg-modal" role="dialog" aria-modal="true" aria-labelledby="jg-case-title">
               <div className="jg-window">
                 <CaseBody c={open} as="div" titleId="jg-case-title" />
-                <button ref={closeBtn} type="button" className="jg-back" onClick={() => setOpen(null)}>VOLTAR AO JOGO (Esc)</button>
+                <button ref={closeBtn} type="button" className="jg-back" onClick={() => setOpen(null)}>VOLTAR AO JOGO<span className="jg-hint"> (Esc)</span></button>
               </div>
             </div>
           )}
           <div className="jg-pad" aria-hidden="true">
-            <span><button type="button" data-k="left">◀</button><button type="button" data-k="right">▶</button></span>
-            <span><button type="button" data-k="down">▼</button><button type="button" data-k="up">▲</button><button type="button" data-k="punch">X</button><button type="button" data-k="jump">⤒</button></span>
+            <div className="jg-dpad">
+              <button type="button" data-k="up" className="is-up">▲</button>
+              <button type="button" data-k="left" className="is-left">◀</button>
+              <button type="button" data-k="right" className="is-right">▶</button>
+              <button type="button" data-k="down" className="is-down">▼</button>
+            </div>
+            <div className="jg-act">
+              <button type="button" data-k="punch" className="is-b"><b>B</b><small>SOCO</small></button>
+              <button type="button" data-k="jump" className="is-a"><b>A</b><small>PULO</small></button>
+            </div>
           </div>
         </div>
       )}

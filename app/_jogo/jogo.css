@@ -147,8 +147,8 @@ html:has(.jg)::-webkit-scrollbar-button{display:none}
 @media (prefers-reduced-motion:reduce){ .jg-spr{animation:none} }
 .jg-tagline{font:800 13px var(--mono); letter-spacing:.3em; color:var(--gold); margin:0 0 6vh}
 .jg-case{margin:0 0 9vh}
-.jg-tag{font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:0 0 6px}
-.jg-badge{margin-left:10px; padding:2px 8px; border-radius:999px; background:#7c4dff; color:#fff; font-size:10px; letter-spacing:.06em}
+.jg-tag{font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:0 0 6px; display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px}
+.jg-badge{display:inline-block; white-space:nowrap; padding:2px 8px; border-radius:999px; background:#7c4dff; color:#fff; font-size:10px; letter-spacing:.06em}
 .jg-case h2{font:900 clamp(34px,5vw,56px)/1 var(--mono); margin:0 0 14px}
 .jg-ideia{font-size:18px; color:#c6cfdf; max-width:60ch; margin:0 0 22px}
 .jg-cols{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:0 0 18px}
@@ -204,7 +204,18 @@ html:has(.jg)::-webkit-scrollbar-button{display:none}
 .jg-ctrl{font:12px var(--mono); color:var(--mut); margin:0 0 20px; line-height:2}
 .jg-ctrl-touch,.jg-t{display:none}
 @media (pointer: coarse){ .jg-ctrl-keys,.jg-k{display:none} .jg-ctrl-touch{display:block} .jg-t{display:inline} }
-.jg-pad{position:absolute; bottom:14px; left:12px; right:12px; z-index:2; display:none; justify-content:space-between; align-items:end}
-.jg-pad span{display:flex; gap:8px}
-.jg-pad button{width:56px; height:56px; border-radius:12px; border:2px solid #2a3550; background:rgba(17,26,43,.85); color:var(--ink); font:800 20px var(--mono); touch-action:none}
+/* controle de toque: direcional em cruz à esquerda, A (pulo) e B (soco) à direita */
+.jg-pad{position:absolute; bottom:max(16px, env(safe-area-inset-bottom)); left:14px; right:14px; z-index:2; display:none; justify-content:space-between; align-items:flex-end; pointer-events:none}
+.jg-pad button{pointer-events:auto; touch-action:none; user-select:none; -webkit-tap-highlight-color:transparent; color:var(--ink); font:800 16px var(--mono);
+  background:rgba(14,22,40,.7); border:2px solid #3a4a72; box-shadow:0 4px 0 rgba(0,0,0,.55); padding:0}
+.jg-pad button:active{transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,.55); background:rgba(58,74,114,.85)}
+.jg-dpad{display:grid; grid-template-columns:repeat(3,48px); grid-template-rows:repeat(3,48px)}
+.jg-dpad button{border-radius:8px}
+.jg-dpad .is-up{grid-area:1/2} .jg-dpad .is-left{grid-area:2/1} .jg-dpad .is-right{grid-area:2/3} .jg-dpad .is-down{grid-area:3/2}
+.jg-act{position:relative; width:148px; height:132px}
+.jg-act button{position:absolute; width:66px; height:66px; border-radius:50%; display:grid; place-content:center; line-height:1}
+.jg-act b{font-size:22px}
+.jg-act small{font-size:9px; letter-spacing:.12em; opacity:.85; margin-top:2px}
+.jg-act .is-a{right:0; top:0; border-color:var(--gold); color:var(--gold)}
+.jg-act .is-b{left:0; bottom:0; border-color:#ff6b6b; color:#ff8a8a}
 @media (pointer: coarse){ .jg-pad{display:flex} }
