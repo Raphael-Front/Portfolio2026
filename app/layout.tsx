@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://raphaelmdev.vercel.app"),
   title: "Raphael Martins · Desenvolvedor Full-stack",
   description:
-    "Desenvolvedor full-stack focado em aplicações web para a construção civil. Criador dos sistemas Audit BIM, Edifica e Databook.",
+    "Portfólio jogável de Raphael Martins, desenvolvedor full-stack: sistemas para a construção civil (Audit BIM, Edifica, Databook), RH (Tempus), DevOps (HUB) e games (Partietta).",
   openGraph: {
     title: "Raphael Martins · Desenvolvedor Full-stack",
     description:
@@ -24,9 +24,6 @@ export default function RootLayout({
     <html lang="pt-BR" style={{ colorScheme: "light" }}>
       <head>
         <meta name="color-scheme" content="light" />
-        <noscript>
-          <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
-        </noscript>
       </head>
       <body>{children}</body>
     </html>
