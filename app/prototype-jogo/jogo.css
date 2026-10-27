@@ -1,0 +1,71 @@
+/* PROTÓTIPO DESCARTÁVEL · estilos da rota /prototype-jogo (prefixo jg-) */
+.jg{--bg:#0a0f1a; --ink:#e8edf6; --mut:#8e9ab0; --acc:#3ad1e6; --gold:#f2c230; --line:#24314d;
+  --sans:"Segoe UI",-apple-system,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  background:var(--bg); color:var(--ink); font-family:var(--sans); min-height:100vh; line-height:1.55}
+.jg-hero{max-width:1080px; margin:0 auto; padding:18vh 24px 14vh}
+.jg-kicker{font:700 13px var(--mono); letter-spacing:.2em; text-transform:uppercase; color:var(--acc); margin:0 0 18px}
+.jg-name{font:900 clamp(56px,10vw,132px)/.92 var(--mono); letter-spacing:-.02em; margin:0 0 26px; color:#fff; text-shadow:4px 4px 0 #1b6c7a, 8px 8px 0 #0e3a44}
+.jg-lead{font-size:clamp(18px,1.8vw,22px); color:var(--mut); max-width:46ch; margin:0 0 34px}
+.jg-cta{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 16px}
+.jg-play,.jg-read{font:800 15px var(--mono); letter-spacing:.14em; padding:14px 22px; border-radius:4px; text-decoration:none; cursor:pointer}
+.jg-play{background:var(--acc); color:#06222a; border:0; box-shadow:4px 4px 0 #0e3a44}
+.jg-play:active{transform:translate(2px,2px); box-shadow:2px 2px 0 #0e3a44}
+.jg-read{color:var(--ink); border:2px solid #2a3550}
+.jg-help{font:12px var(--mono); color:var(--mut); margin:0}
+.jg button:focus-visible,.jg a:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+
+/* modo leitura: cases completos */
+.jg-read-mode{max-width:960px; margin:0 auto; padding:8vh 24px; border-top:14px solid transparent;
+  border-image:repeating-linear-gradient(-45deg, var(--gold) 0 18px, #14110a 18px 36px) 14}
+.jg-tagline{font:800 13px var(--mono); letter-spacing:.3em; color:var(--gold); margin:0 0 6vh}
+.jg-case{margin:0 0 9vh}
+.jg-tag{font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:0 0 6px}
+.jg-badge{margin-left:10px; padding:2px 8px; border-radius:999px; background:#7c4dff; color:#fff; font-size:10px; letter-spacing:.06em}
+.jg-case h2{font:900 clamp(34px,5vw,56px)/1 var(--mono); margin:0 0 14px}
+.jg-ideia{font-size:18px; color:#c6cfdf; max-width:60ch; margin:0 0 22px}
+.jg-cols{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:0 0 18px}
+.jg-cols h3{font:800 12px var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin:0 0 10px}
+.jg-cols ul{list-style:none; margin:0; padding:0; display:grid; gap:8px; color:#d5dcea}
+.jg-cols li{position:relative; padding-left:22px}
+.jg-dores li::before{content:""; position:absolute; left:0; top:.62em; width:10px; height:2px; background:#ff6b6b}
+.jg-wins li::before{content:""; position:absolute; left:1px; top:.32em; width:10px; height:5px; border-left:2px solid #4fd16b; border-bottom:2px solid #4fd16b; transform:rotate(-45deg)}
+.jg-stack{font:12px var(--mono); color:var(--mut); margin:0}
+.jg-end{padding:10vh 24px 16vh; text-align:center; font:12px var(--mono); color:var(--mut)}
+@media (max-width:700px){ .jg-cols{grid-template-columns:1fr} }
+
+/* modo jogo */
+.jg-stage{position:fixed; inset:0; z-index:40; background:#0e1730}
+.jg-canvas{position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated}
+.jg-hud{position:absolute; top:12px; left:12px; right:12px; z-index:2; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  font:800 13px var(--mono); letter-spacing:.08em; background:rgba(6,10,18,.85); border:2px solid var(--line); padding:8px 12px}
+.jg-hearts{color:#ff5a6e; font-size:18px; letter-spacing:2px}
+.jg-hearts i{font-style:normal; color:#3a2430}
+.jg-zone{color:var(--gold); margin-left:auto}
+.jg-hud button{font:800 12px var(--mono); background:var(--line); color:var(--ink); border:0; padding:6px 10px; cursor:pointer}
+.jg-toast{position:absolute; top:70px; left:50%; transform:translateX(-50%); z-index:2; display:grid; gap:4px; min-width:min(420px,92vw);
+  background:#0b1222; border:2px solid var(--gold); box-shadow:4px 4px 0 #05080f; padding:10px 16px; animation:jg-pop .25s ease-out}
+.jg-toast b{font:800 11px var(--mono); letter-spacing:.14em; color:var(--gold)}
+.jg-toast span{font-size:16px; font-weight:600}
+@keyframes jg-pop{from{transform:translate(-50%,-10px); opacity:0}}
+.jg-modal{position:absolute; inset:0; z-index:3; display:grid; place-items:center; background:rgba(4,7,14,.72); padding:16px}
+.jg-window{width:min(860px,100%); max-height:88vh; overflow:auto; background:#0e1628; border:3px solid var(--gold); box-shadow:8px 8px 0 #05080f; padding:28px 30px 22px}
+.jg-window .jg-case{margin:0 0 18px}
+.jg-back{font:800 13px var(--mono); letter-spacing:.1em; background:var(--gold); color:#14110a; border:0; padding:12px 18px; cursor:pointer; box-shadow:3px 3px 0 #6b5414}
+.jg-intro{width:min(680px,100%)}
+.jg-intro h2{font:900 clamp(30px,4vw,44px)/1 var(--mono); margin:0 0 10px}
+.jg-steps{list-style:none; margin:0 0 20px; padding:0; display:grid; gap:14px}
+.jg-steps li{display:grid; grid-template-columns:72px 1fr; gap:14px; align-items:center; color:#d5dcea}
+.jg-steps img{max-width:72px; max-height:56px; justify-self:center; image-rendering:pixelated}
+.jg-steps b{color:var(--gold)}
+.jg-down{font:900 34px var(--mono); font-style:normal; color:#ff9d3a; justify-self:center; animation:jg-bob .6s ease-in-out infinite alternate}
+@keyframes jg-bob{to{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){ .jg-down{animation:none} }
+.jg kbd{font:800 12px var(--mono); background:#1b2540; border:1px solid #33416a; border-bottom-width:3px; border-radius:4px; padding:1px 6px; color:var(--ink)}
+.jg-ctrl{font:12px var(--mono); color:var(--mut); margin:0 0 20px; line-height:2}
+.jg-ctrl-touch,.jg-t{display:none}
+@media (pointer: coarse){ .jg-ctrl-keys,.jg-k{display:none} .jg-ctrl-touch{display:block} .jg-t{display:inline} }
+.jg-pad{position:absolute; bottom:14px; left:12px; right:12px; z-index:2; display:none; justify-content:space-between; align-items:end}
+.jg-pad span{display:flex; gap:8px}
+.jg-pad button{width:56px; height:56px; border-radius:12px; border:2px solid #2a3550; background:rgba(17,26,43,.85); color:var(--ink); font:800 20px var(--mono); touch-action:none}
+@media (pointer: coarse){ .jg-pad{display:flex} }

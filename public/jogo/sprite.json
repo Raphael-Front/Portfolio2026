@@ -1,0 +1,10 @@
+{
+  "cell": 64,
+  "baseline": 62,
+  "rows": {
+    "idle": 4,
+    "run": 6,
+    "jump": 4,
+    "punch": 5
+  }
+}
