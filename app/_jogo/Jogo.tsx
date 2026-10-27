@@ -12,6 +12,10 @@ import { useEffect, useRef, useState } from "react";
 import { createSom, type Som } from "./som";
 import Leitura, { CONTATOS, Stack } from "./Leitura";
 import Player from "./Player";
+import obj1 from "@/public/jogo/fase1/obj.json";
+import obj2 from "@/public/jogo/fase2/obj.json";
+import obj3 from "@/public/jogo/fase3/obj.json";
+import obj4 from "@/public/jogo/fase4/obj.json";
 
 /* ---------------- conteúdo ---------------- */
 export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[] };
@@ -183,6 +187,18 @@ function buildLevel(vw: number) {
     ...(p.x > X0 + 8 ? [{ x: (X0 + p.x) / 2, y: p.y }] : []),
     ...(p.x + p.w < X0 + SW - 8 ? [{ x: (p.x + p.w + X0 + SW) / 2, y: p.y }] : []),
   ]);
+
+  // tela estreita: objeto de cenário que encosta em outro sai (porta de projeto primeiro, depois placas, depois o resto)
+  const SIZES = [obj1, obj2, obj3, obj4] as unknown as Record<string, number[]>[];
+  const width = (p: Prop) => SIZES[Number(p.img[4]) - 1][p.img.split("/obj-")[1]]?.[0] ?? 40;
+  const rank = (p: Prop) => (p.case ? 0 : p.label ? 1 : 2);
+  const kept: Prop[] = [];
+  for (const p of [...props].sort((a, b) => rank(a) - rank(b))) {
+    const a = p.x - width(p) / 2 - 4, b = p.x + width(p) / 2 + 4;
+    const hit = kept.some((q) => q.y === p.y && a < q.x + width(q) / 2 && b > q.x - width(q) / 2);
+    if (p.case || !hit) kept.push(p);
+  }
+  props.splice(0, props.length, ...props.filter((p) => kept.includes(p)));
 
   return {
     SW, X0, plats, props, items, bugs, notes, gaps, worldH: end4.y + 60, // o mundo termina no último piso (sem faixa vazia)
@@ -395,7 +411,10 @@ export default function Jogo() {
         if (dx < 24 && pl.vy > 0 && feet > -30 && feet < -6) { b.dead = 0.01; kills++; som.current?.sfx("stomp"); pl.vy = -460; pl.jumps = 1; continue; }
         if (dx < 20 && Math.abs(feet) < 10 && pl.hurt <= 0) {
           hearts -= 1; hits++; pl.hurt = 1.2; som.current?.sfx("hurt"); pl.vy = -380; pl.x += (pl.x < b.x ? -1 : 1) * 34;
-          if (hearts <= 0) hearts = 3; // sem game over punitivo
+          if (hearts <= 0) { // perdeu as 3 vidas: a run recomeça do zero
+            setToast({ k: performance.now(), title: "GAME OVER", text: "Suas vidas acabaram. A run recomeça do início." });
+            setRun((r) => r + 1); return;
+          }
           push();
         }
       }
