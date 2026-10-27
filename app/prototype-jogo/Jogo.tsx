@@ -9,9 +9,12 @@
 // Arte: pixel art gerada no ChatGPT e processada em public/jogo (personagem, fase1/, fase2/).
 
 import { useEffect, useRef, useState } from "react";
+import { createSom, type Som } from "./som";
+import Leitura, { CONTATOS } from "./Leitura";
+import Player from "./Player";
 
 /* ---------------- conteúdo ---------------- */
-type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[] };
+export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[] };
 const CASES: Case[] = [
   {
     key: "audit", kicker: "GPL Incorporadora · BIM", title: "Audit BIM",
@@ -22,9 +25,9 @@ const CASES: Case[] = [
   },
   {
     key: "edifica", kicker: "GPL Incorporadora · Obra", title: "Edifica",
-    ideia: "Diário de obra no celular e folha da equipe integrada ao ERP, com dupla aprovação antes de ir para o sistema.",
-    dores: ["Diário em papel e WhatsApp, sem histórico confiável", "Apontamento de folha digitado duas vezes no ERP", "Aprovação sem controle de quem aprovou o quê"],
-    impactos: ["R$ 2M+ em folha geridos", "7 obras integradas", "A folha vai para o ERP sem ninguém redigitar"],
+    ideia: "Diário de obra pensado para o tablet, que também funciona no celular, e folha de pagamento das equipes integrada aos ERPs, com dupla aprovação antes de ir para o sistema.",
+    dores: ["Diários de obra num sistema externo, com pouco controle", "Folha enviada colaborador por colaborador, num app do Power Apps", "Pouco rastreio do que foi produzido em relação ao que foi pago", "Quase nenhum relatório de folha, e indicadores fracos sobre os diários"],
+    impactos: ["R$ 2,5M+ em folha geridos", "9 obras integradas", "Integração de ponta a ponta com 2 ERPs: UAU e ALMOB", "Relatórios com indicadores diferentes, para ver só o que importa", "Em média, por mês: 4.861 visualizações, 638 acessos e 67 pessoas usando"],
     stack: ["React", "ERP UAU", "TypeScript"],
   },
   {
@@ -191,12 +194,36 @@ export default function Jogo() {
   const paused = useRef(false);
   const openCase = useRef<(c: Case) => void>(() => {});
   const closeBtn = useRef<HTMLButtonElement>(null);
+  const som = useRef<Som | null>(null);
+  const [muted, setMuted] = useState(false);
+  const wasOpen = useRef(false);
+  // fim da run: nota pela vida que sobrou, itens e skills
+  type Result = { vidas: number; items: number; totalItems: number; skills: number; cases: number; kills: number; tempo: number; nota: number; grade: string };
+  const [result, setResult] = useState<Result | null>(null);
+  const [run, setRun] = useState(0); // trocar remonta o jogo do zero
+  const resultBtn = useRef<HTMLButtonElement>(null);
 
   // abrir o case pausa o jogo; fechar devolve
   useEffect(() => {
-    paused.current = !!open || intro;
-    if (open) closeBtn.current?.focus(); else if (intro) startBtn.current?.focus();
-  }, [open, intro]);
+    paused.current = !!open || intro || !!result;
+    if (open) closeBtn.current?.focus(); else if (intro) startBtn.current?.focus(); else if (result) resultBtn.current?.focus();
+    som.current?.duck(!!open || intro || !!result); // música baixa com o jogo pausado
+    if (wasOpen.current && !open) som.current?.sfx("close");
+    wasOpen.current = !!open;
+  }, [open, intro, result]);
+  // tela de nota: Esc volta a explorar
+  useEffect(() => {
+    if (!result) return;
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") { e.preventDefault(); setResult(null); } };
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  }, [result]);
+  // som: preferência de mudo guardada neste navegador
+  useEffect(() => { try { setMuted(localStorage.getItem("jg-mudo") === "1"); } catch {} }, []);
+  const toggleMute = () => setMuted((m) => {
+    try { localStorage.setItem("jg-mudo", m ? "0" : "1"); } catch {}
+    som.current?.mute(!m); return !m;
+  });
   // tutorial: Enter, espaço ou Esc começam o jogo
   useEffect(() => {
     if (!intro) return;
@@ -221,11 +248,14 @@ export default function Jogo() {
     const img: Record<string, HTMLImageElement> = {};
     const load = (key: string, src: string) => { const im = new Image(); im.src = src; img[key] = im; };
     for (const n of IMGS) load(n, `/jogo/${n}.png`);
+    som.current = createSom(muted); som.current.duck(intro);
     for (const f of FASES) { load(`${f.id}/fundo`, `/jogo/${f.id}/fundo.webp`); load(`hero/${f.hero}`, `/jogo/${f.hero}.png`); }
 
     let L = buildLevel(innerWidth);
     const pl = { x: L.spawns[0].x, y: L.spawns[0].y, vx: 0, vy: 0, face: 1, ground: null as Plat | null, jumps: 0, drop: 0, punch: 0, hurt: 0, anim: "idle", t: 0, still: 0 };
     let hearts = 3, got = 0, camY = 0, last = performance.now(), raf = 0;
+    let hits = 0, kills = 0, finished = false;
+    const t0 = performance.now();
     const opened = new Set<string>();
     const skills = new Set<string>();
     let zone = ZONES[0][1];
@@ -235,7 +265,7 @@ export default function Jogo() {
 
     openCase.current = (c: Case) => {
       opened.add(c.key); c.stack.forEach((s) => skills.add(s)); push();
-      setOpen(c);
+      som.current?.sfx("door"); setOpen(c);
     };
 
     const resize = () => {
@@ -265,16 +295,18 @@ export default function Jogo() {
     };
 
     function jump() {
-      if (pl.ground || pl.jumps < 2) { pl.vy = -JUMP * (pl.ground ? 1 : 0.85); pl.jumps = pl.ground ? 1 : pl.jumps + 1; pl.ground = null; }
+      if (pl.ground || pl.jumps < 2) { som.current?.sfx(pl.ground ? "jump" : "jump2"); pl.vy = -JUMP * (pl.ground ? 1 : 0.85); pl.jumps = pl.ground ? 1 : pl.jumps + 1; pl.ground = null; }
     }
-    function punch() { if (pl.punch <= 0) pl.punch = 3 / ANIM.punch.fps; }
+    function punch() { if (pl.punch <= 0) { pl.punch = 3 / ANIM.punch.fps; som.current?.sfx("punch"); } }
     function up() {
       const d = doorAt();
       if (d) openCase.current(CASES.find((c) => c.key === d.case)!); else jump();
     }
-    function down() { if (pl.ground && !pl.ground.solid) pl.drop = 0.25; }
+    function down() { if (pl.ground && !pl.ground.solid) { pl.drop = 0.25; som.current?.sfx("drop"); } }
 
     const onKey = (e: KeyboardEvent) => {
+      som.current?.resume();
+      if (e.key === "m" && !e.repeat) return toggleMute();
       if (paused.current) return;
       const k = e.key;
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " "].includes(k)) e.preventDefault();
@@ -322,11 +354,21 @@ export default function Jogo() {
 
       const z = ZONES.find(([until]) => pl.y < until)![1];
       if (z !== zone) { zone = z; push(); }
+      som.current?.fase(faseAt(pl.y));
+      // pisou no último piso (o único sólido): fim da run, uma vez por partida
+      if (!finished && pl.ground?.solid) {
+        finished = true;
+        const vidas = Math.max(0, 3 - hits);
+        const nota = Math.round((got / L.items.length) * 40 + (skills.size / ALL_SKILLS.length) * 40 + (vidas / 3) * 20);
+        const grade = nota >= 95 ? "S" : nota >= 80 ? "A" : nota >= 60 ? "B" : nota >= 40 ? "C" : "D";
+        som.current?.sfx("win");
+        setResult({ vidas, items: got, totalItems: L.items.length, skills: skills.size, cases: opened.size, kills, tempo: (performance.now() - t0) / 1000, nota, grade });
+      }
 
       // itens: coletar mostra um impacto do projeto
       for (const p of L.items) {
         if (!p.got && Math.abs(p.x - pl.x) < 26 && Math.abs(p.y - (pl.y - 30)) < 34) {
-          p.got = true; got++; push();
+          p.got = true; got++; push(); som.current?.sfx("item");
           const c = CASES.find((c) => c.key === p.caseKey)!;
           setToast({ k: performance.now(), title: `${FASES[p.f].itemName} ${p.idx + 1}/3 · ${c.title.toUpperCase()}`, text: c.impactos[p.idx] });
         }
@@ -338,10 +380,10 @@ export default function Jogo() {
         if (b.x < b.min || b.x > b.max) { b.dir *= -1; b.x = Math.max(b.min, Math.min(b.max, b.x)); }
         const dx = Math.abs(b.x - pl.x), feet = pl.y - b.y;
         const ahead = pl.face > 0 ? b.x > pl.x && b.x - pl.x < 48 : b.x < pl.x && pl.x - b.x < 48;
-        if (pl.punch > 0 && ahead && Math.abs(feet) < 30) { b.dead = 0.01; continue; }
-        if (dx < 24 && pl.vy > 0 && feet > -30 && feet < -6) { b.dead = 0.01; pl.vy = -460; pl.jumps = 1; continue; }
+        if (pl.punch > 0 && ahead && Math.abs(feet) < 30) { b.dead = 0.01; kills++; som.current?.sfx("hit"); continue; }
+        if (dx < 24 && pl.vy > 0 && feet > -30 && feet < -6) { b.dead = 0.01; kills++; som.current?.sfx("stomp"); pl.vy = -460; pl.jumps = 1; continue; }
         if (dx < 20 && Math.abs(feet) < 10 && pl.hurt <= 0) {
-          hearts -= 1; pl.hurt = 1.2; pl.vy = -380; pl.x += (pl.x < b.x ? -1 : 1) * 34;
+          hearts -= 1; hits++; pl.hurt = 1.2; som.current?.sfx("hurt"); pl.vy = -380; pl.x += (pl.x < b.x ? -1 : 1) * 34;
           if (hearts <= 0) hearts = 3; // sem game over punitivo
           push();
         }
@@ -421,9 +463,11 @@ export default function Jogo() {
       // vigas sendo içadas: cabo da grua sobe até a plataforma acima, com cintas e gancho
       for (const p of L.plats) {
         if (p.tile !== "viga" || sy(p.y) < -10 || sy(p.y) > vh + 10) continue;
-        const cx = Math.round(p.x + p.w / 2), y = Math.round(sy(p.y));
-        const above = L.plats.filter((q) => q.y < p.y - 20 && cx > q.x && cx < q.x + q.w).sort((a, b) => b.y - a.y)[0];
-        const cy0 = above ? Math.round(sy(above.y) + 20) : 0;
+        // o cabo sobe até o topo da tela por um ponto sem plataforma acima; sem ponto livre, a viga fica sem cabo
+        const livre = (x: number) => !L.plats.some((q) => q.y < p.y - 20 && x > q.x - 6 && x < q.x + q.w + 6);
+        const cx = [0.5, 0.3, 0.7, 0.18, 0.82].map((f) => Math.round(p.x + p.w * f)).find((x) => x - 20 > p.x && x + 20 < p.x + p.w && livre(x));
+        if (cx === undefined) continue;
+        const y = Math.round(sy(p.y)), cy0 = 0;
         ctx.fillStyle = "#151b2a";
         ctx.fillRect(cx - 1, cy0, 2, Math.max(0, y - 14 - cy0));
         ctx.fillRect(cx - 18, y - 14, 2, 14); ctx.fillRect(cx + 16, y - 14, 2, 14); ctx.fillRect(cx - 18, y - 16, 36, 2);
@@ -504,6 +548,7 @@ export default function Jogo() {
     raf = requestAnimationFrame(loop);
     return () => {
       cancelAnimationFrame(raf);
+      som.current?.stop(); som.current = null;
       window.removeEventListener("resize", onResize);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("keyup", onKeyUp);
@@ -512,7 +557,7 @@ export default function Jogo() {
       document.removeEventListener("pointercancel", onTouch);
       keys.current = {};
     };
-  }, [playing]);
+  }, [playing, run]);
 
   // Esc fecha o case (o jogo ignora teclas enquanto pausado)
   useEffect(() => {
@@ -525,6 +570,7 @@ export default function Jogo() {
   return (
     <div className="jg">
       <header className="jg-hero">
+        <div className="jg-hero-txt">
         <p className="jg-kicker">Raphael Martins · Goiânia GO</p>
         <h1 className="jg-name">RAPHAEL<br />MARTINS</h1>
         <p className="jg-lead">Desenvolvedor full-stack. Construo sistemas para a construção civil e para quem mais tiver um processo travado em planilha.</p>
@@ -533,19 +579,11 @@ export default function Jogo() {
           <a href="#fase1" className="jg-read">SÓ QUERO LER ↓</a>
         </p>
         <p className="jg-help">← → anda · espaço pula (2× no ar) · ↓ desce (atravessa o chão) · ↑ entra na porta · X soca · Esc sai</p>
+        </div>
+        <Player />
       </header>
 
-      <section id="fase1" className="jg-read-mode">
-        <p className="jg-tagline">FASE 1 · CANTEIRO DE OBRAS</p>
-        {CASES.slice(0, 3).map((c) => <CaseBody key={c.key} c={c} as="article" />)}
-        <p className="jg-tagline">FASE 2 · ESCRITÓRIO</p>
-        {CASES.slice(3, 4).map((c) => <CaseBody key={c.key} c={c} as="article" />)}
-        <p className="jg-tagline">FASE 3 · SALA DE SERVIDORES</p>
-        {CASES.slice(4, 5).map((c) => <CaseBody key={c.key} c={c} as="article" />)}
-        <p className="jg-tagline">FASE 4 · FLIPERAMA</p>
-        {CASES.slice(5).map((c) => <CaseBody key={c.key} c={c} as="article" />)}
-      </section>
-      <footer className="jg-end">Fim do protótipo</footer>
+      <Leitura cases={CASES} onPlay={() => { setPlaying(true); setIntro(firstTime()); }} />
 
       {playing && (
         <div className="jg-stage">
@@ -555,12 +593,43 @@ export default function Jogo() {
             <span>ITENS {hud.items}/{hud.total}</span>
             <span>SKILLS {hud.skills}/{ALL_SKILLS.length}</span>
             <span className="jg-zone">{hud.zone}</span>
+            <button type="button" onClick={toggleMute} aria-pressed={muted}>{muted ? "SOM: OFF" : "SOM: ON"} (M)</button>
             <button type="button" onClick={() => setPlaying(false)}>SAIR (Esc)</button>
           </div>
           {toast && (
             <div className="jg-toast" key={toast.k} role="status">
               <b>{toast.title}</b>
               <span>{toast.text}</span>
+            </div>
+          )}
+          {result && (
+            <div className="jg-modal" role="dialog" aria-modal="true" aria-labelledby="jg-res-title">
+              <div className="jg-window jg-result">
+                <p className="jg-tag">Fim da run</p>
+                <div className="jg-res-top">
+                  <div className="jg-grade" data-g={result.grade} aria-label={`Nota ${result.grade}`}>{result.grade}</div>
+                  <div>
+                    <h2 id="jg-res-title">{FRASES[result.grade][0]}</h2>
+                    <p className="jg-ideia">{FRASES[result.grade][1]}</p>
+                    <p className="jg-pontos">{result.nota} / 100 pontos</p>
+                  </div>
+                </div>
+                <dl className="jg-stats">
+                  <div><dt>Vidas</dt><dd className="jg-hearts">{"♥".repeat(result.vidas)}<i>{"♥".repeat(3 - result.vidas)}</i></dd></div>
+                  <div><dt>Itens</dt><dd>{result.items}/{result.totalItems}</dd></div>
+                  <div><dt>Skills</dt><dd>{result.skills}/{ALL_SKILLS.length}</dd></div>
+                  <div><dt>Projetos</dt><dd>{result.cases}/{CASES.length}</dd></div>
+                  <div><dt>Bugs</dt><dd>{result.kills}</dd></div>
+                  <div><dt>Tempo</dt><dd>{Math.floor(result.tempo / 60)}:{String(Math.floor(result.tempo % 60)).padStart(2, "0")}</dd></div>
+                </dl>
+                <p className="jg-res-contato">Gostou? Vamos conversar:{" "}
+                  {CONTATOS.map((c) => <a key={c.label} href={c.href} target="_blank" rel="noreferrer">{c.label}</a>)}
+                </p>
+                <p className="jg-cta">
+                  <button ref={resultBtn} type="button" className="jg-back" onClick={() => { setResult(null); setRun((r) => r + 1); }}>↻ JOGAR DE NOVO</button>
+                  <button type="button" className="jg-read" onClick={() => setResult(null)}>CONTINUAR EXPLORANDO</button>
+                </p>
+              </div>
             </div>
           )}
           {intro && (
@@ -615,6 +684,14 @@ function CaseBody({ c, as: Tag, titleId }: { c: Case; as: "article" | "div"; tit
     </Tag>
   );
 }
+
+const FRASES: Record<string, [string, string]> = {
+  S: ["RUN PERFEITA", "Você viu tudo: cada projeto, cada impacto, cada skill."],
+  A: ["QUASE TUDO", "Faltou bem pouco. Dá para voltar e pegar o que ficou para trás."],
+  B: ["BOA RUN", "Você conheceu a maior parte. Ainda tem item e porta esperando."],
+  C: ["DEU PARA CONHECER", "Você passou pelo básico. Os cases têm muito mais por trás das portas."],
+  D: ["SPEEDRUN, HEIN?", "Muita coisa ficou para trás. Volte e entre nas portas para ver os projetos."],
+};
 
 // tutorial só na primeira vez neste navegador; sem storage (aba privada), mostra sempre
 function firstTime() {
