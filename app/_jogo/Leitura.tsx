@@ -27,6 +27,7 @@ export function Stack({ c, reveal }: { c: Case; reveal?: boolean }) {
   const [aberta, setAberta] = useState(false);
   const rv = reveal ? "jg-rv" : "";
   return (
+    <div className="jg-stack-row">
     <ul className="jg-skills" aria-label="Stack">
       {c.stack.map((s, j) => (
         <li key={s} className={rv} style={{ "--i": j + 2 } as CSSProperties}><i aria-hidden="true">+</i>{s}</li>
@@ -42,6 +43,12 @@ export function Stack({ c, reveal }: { c: Case; reveal?: boolean }) {
         </li>
       )}
     </ul>
+    {c.demo && (
+      <a className="jg-demo" href={c.demo} target="_blank" rel="noopener" title="Demo com dados fictícios">
+        ▶ VER SISTEMA
+      </a>
+    )}
+    </div>
   );
 }
 

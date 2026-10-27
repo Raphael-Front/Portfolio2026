@@ -18,7 +18,7 @@ import obj3 from "@/public/jogo/fase3/obj.json";
 import obj4 from "@/public/jogo/fase4/obj.json";
 
 /* ---------------- conteúdo ---------------- */
-export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[] };
+export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[]; demo?: string };
 // stack: destaques na ordem código, integração/ERP, acesso, banco (e RLS); stackMais: o resto, aberto pelo "+N".
 // Levantado dos repositórios em 27/10/2026.
 const CASES: Case[] = [
@@ -31,7 +31,7 @@ const CASES: Case[] = [
     stackMais: ["React 19", "Tailwind CSS 4", "TanStack Query", "Zustand", "React Hook Form", "Zod", "Recharts", "jsPDF", "Construflow", "Vercel", "GitHub Actions"],
   },
   {
-    key: "edifica", kicker: "GPL Incorporadora · Obra", title: "Edifica",
+    key: "edifica", kicker: "GPL Incorporadora · Obra", title: "Edifica", demo: "/demo/edifica/index.html",
     ideia: "Diário de obra pensado para o tablet, que também funciona no celular, e folha de pagamento das equipes integrada aos ERPs, com dupla aprovação antes de ir para o sistema.",
     dores: ["Diários de obra num sistema externo, com pouco controle", "Folha enviada colaborador por colaborador, num app do Power Apps", "Pouco rastreio do que foi produzido em relação ao que foi pago", "Quase nenhum relatório de folha, e indicadores fracos sobre os diários"],
     impactos: ["R$ 2,5M+ em folha geridos", "9 obras integradas", "Integração de ponta a ponta com 2 ERPs: UAU e ALMOB", "Relatórios com indicadores diferentes, para ver só o que importa", "Em média, por mês: 4.861 visualizações, 638 acessos e 67 pessoas usando"],
