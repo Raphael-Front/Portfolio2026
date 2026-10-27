@@ -194,6 +194,9 @@ function buildLevel(vw: number) {
   const rank = (p: Prop) => (p.case ? 0 : p.label ? 1 : 2);
   const kept: Prop[] = [];
   for (const p of [...props].sort((a, b) => rank(a) - rank(b))) {
+    // não deixa o objeto passar da ponta da plataforma em que está
+    const base = plats.find((q) => q.y === p.y && p.x >= q.x && p.x <= q.x + q.w);
+    if (base) p.x = Math.min(Math.max(p.x, base.x + width(p) / 2 + 2), base.x + base.w - width(p) / 2 - 2);
     const a = p.x - width(p) / 2 - 4, b = p.x + width(p) / 2 + 4;
     const hit = kept.some((q) => q.y === p.y && a < q.x + width(q) / 2 && b > q.x - width(q) / 2);
     if (p.case || !hit) kept.push(p);
