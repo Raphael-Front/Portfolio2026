@@ -1,6 +1,15 @@
 // Demo estática do Edifica: liga os botões principais às telas capturadas
 // e avisa que as demais ações estão desligadas (não há servidor por trás).
 (function () {
+  // celular e tablet: as demos são só para computador; mostra um aviso no lugar da tela
+  if (window.matchMedia("(max-width: 1023px), (pointer: coarse)").matches) {
+    var m = document.createElement("div");
+    m.style.cssText = "position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#0a0f1a;color:#e8edf6;padding:24px;text-align:center;font:500 16px/1.5 'Segoe UI',system-ui,sans-serif";
+    m.innerHTML = '<div style="max-width:340px"><p style="font:800 12px ui-monospace,Consolas,monospace;letter-spacing:.16em;color:#f2c230;margin:0 0 12px">DEMO</p><p style="font-size:22px;font-weight:800;margin:0 0 10px">Disponível só no computador</p><p style="margin:0 0 22px;color:#b9c4d8">Esta demonstração reproduz o sistema na tela de desktop. Abra pelo computador para navegar pelos módulos.</p><a href="/" style="display:inline-block;background:#3ad1e6;color:#06222a;font:800 14px ui-monospace,Consolas,monospace;letter-spacing:.1em;padding:12px 18px;text-decoration:none">← VOLTAR AO PORTFÓLIO</a></div>';
+    document.body.appendChild(m);
+    document.documentElement.style.overflow = "hidden";
+    return;
+  }
   var pagina = location.pathname.split("/").pop() || "index.html";
   var txt = function (el) { return (el.textContent || "").replace(/\s+/g, " ").trim(); };
   var ir = function (f) { location.href = f; };

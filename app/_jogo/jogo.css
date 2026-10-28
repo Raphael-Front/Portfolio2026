@@ -74,9 +74,9 @@
 .jg-demo{align-self:flex-start; font:800 12px var(--mono); letter-spacing:.06em; color:#06222a; background:var(--acc); border:2px solid var(--acc); text-decoration:none; padding:5px 10px; box-shadow:3px 3px 0 rgba(0,0,0,.55); white-space:nowrap}
 .jg-demo:hover{filter:brightness(1.08)}
 .jg-demo:active{transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,.55)}
-/* sistema sem layout de celular: no lugar do botão, um aviso */
+/* demos só no computador: no celular e tablet, um aviso no lugar do botão */
 .jg-demo-off{display:none; align-self:flex-start; font:700 11px var(--mono); letter-spacing:.06em; color:var(--mut); border:2px dashed rgba(255,255,255,.18); padding:5px 10px; white-space:nowrap}
-@media (max-width:1023px), (pointer:coarse){ .jg-demo.is-desktop{display:none} .jg-demo-off{display:inline-block} }
+@media (max-width:1023px), (pointer:coarse){ .jg-demo{display:none} .jg-demo-off{display:inline-block} }
 .jg-skills li{font:800 12px var(--mono); letter-spacing:.06em; color:#fff; padding:5px 10px; border:2px solid var(--acc); background:color-mix(in srgb, var(--acc) 16%, transparent)}
 .jg-skills i{font-style:normal; color:var(--acc); margin-right:6px}
 .jg-skills li.is-mais{color:#c6cfdf; border-style:dashed; background:none; animation:jg-chip .3s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(var(--i,0) * 25ms)}

@@ -44,11 +44,11 @@ export function Stack({ c, reveal }: { c: Case; reveal?: boolean }) {
       )}
     </ul>
     {c.demo && (
-      <a className={c.demoSoDesktop ? "jg-demo is-desktop" : "jg-demo"} href={c.demo} target="_blank" rel="noopener" title="Demo com dados fictícios">
+      <a className="jg-demo" href={c.demo} target="_blank" rel="noopener" title="Demo com dados fictícios">
         ▶ VER SISTEMA
       </a>
     )}
-    {c.demo && c.demoSoDesktop && <span className="jg-demo-off">Demo não disponível para celular</span>}
+    {c.demo && <span className="jg-demo-off">Demo não disponível para celular</span>}
     </div>
   );
 }
