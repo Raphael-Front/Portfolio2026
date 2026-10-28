@@ -18,7 +18,7 @@ import obj3 from "@/public/jogo/fase3/obj.json";
 import obj4 from "@/public/jogo/fase4/obj.json";
 
 /* ---------------- conteúdo ---------------- */
-export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[]; demo?: string };
+export type Case = { key: string; kicker: string; title: string; badge?: string; ideia: string; dores: string[]; impactos: string[]; stack: string[]; stackMais: string[]; demo?: string; demoSoDesktop?: boolean };
 // stack: destaques na ordem código, integração/ERP, acesso, banco (e RLS); stackMais: o resto, aberto pelo "+N".
 // Levantado dos repositórios em 27/10/2026.
 const CASES: Case[] = [
@@ -39,7 +39,7 @@ const CASES: Case[] = [
     stackMais: ["React 19", "Tailwind CSS 4", "shadcn/ui", "TanStack Query", "React Hook Form", "Zod", "Recharts", "visx", "GSAP", "dnd-kit", "jsPDF", "xlsx", "Microsoft Graph", "Discord", "Supabase Edge Functions", "Supabase Storage", "Upstash Redis", "GlitchTip", "PostHog", "Playwright", "Vercel Cron", "GitHub Actions", "AES-256-GCM (LGPD)"],
   },
   {
-    key: "databook", kicker: "GPL Incorporadora · Qualidade", title: "Databook", badge: "Em desenvolvimento",
+    key: "databook", kicker: "GPL Incorporadora · Qualidade", title: "Databook", demo: "/demo/databook/index.html", demoSoDesktop: true, badge: "Em desenvolvimento",
     ideia: "Laudos e ensaios num lugar só, com revisões preservadas e aprovação do SGQ com trilha de auditoria.",
     dores: ["Laudos espalhados em pastas, difíceis de achar na entrega", "Versões sobrescritas, sem histórico", "Aprovação do SGQ sem trilha de auditoria"],
     impactos: ["Documentação pronta para a entrega da obra", "Cada revisão preservada, sem sobrescrever", "Aprovado não se edita mais"],

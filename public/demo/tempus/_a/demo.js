@@ -71,7 +71,32 @@
     faixa.style.whiteSpace = "nowrap"; faixa.style.fontSize = "12px";
   }
 
+  // Databook: itens das listas abrem o painel de detalhe capturado
+  var LIGA = [
+    [/^obra-ensaio/, { "Resistência à compressão do concreto": "obra-ensaio-concluido.html", "Estanqueidade de impermeabilização": "obra-ensaio-tratativa.html", "Prova de carga em guarda-corpo": "obra-ensaio-reprovado.html", "Resistência à compressão de bloco cerâmico": "obra-ensaio-aguardando.html" }],
+    [/^obra-acabamento/, { "Misturador monocomando de cozinha": "obra-acabamento.html", "Relatório PDF": "obra-acabamentos-relatorio.html" }],
+    [/^obra-biblioteca/, { "Resistência à compressão do concreto": "obra-biblioteca-ensaio.html" }],
+    [/^biblioteca-ensaio/, { "Resistência à compressão do concreto": "biblioteca-ensaio.html" }],
+    [/^biblioteca-acabamento/, { "Misturador monocomando de cozinha": "biblioteca-acabamento.html" }],
+    [/^fornecedor/, { "Hidrocentro Serviços Hidráulicos Ltda": "fornecedor.html" }],
+    [/^laboratorio/, { "Laboratório Cerrado Ensaios Tecnológicos": "laboratorio.html" }],
+    [/^equipamentos?-interno/, { "Paquímetro": "equipamento-interno.html" }],
+    [/^obra(s|-cadastro)\./, { "Residencial Jardim das Acácias": "obra-cadastro.html" }],
+  ];
+  function itemDeLista(el) {
+    var alvo = el.closest("button, a, li, [role=button], [role=option]");
+    if (!alvo) return null;
+    var t = txt(alvo);
+    for (var i = 0; i < LIGA.length; i++) {
+      if (!LIGA[i][0].test(pagina)) continue;
+      for (var k in LIGA[i][1]) if (t.indexOf(k) !== -1) return LIGA[i][1][k];
+    }
+    return null;
+  }
+
   document.addEventListener("click", function (e) {
+    var item = itemDeLista(e.target);
+    if (item) { e.preventDefault(); ir(item); return; }
     // menu aberto no celular: tocar fora dele fecha
     if (estreita && lateral && !lateral.style.transform && !e.target.closest("aside")) {
       lateral.style.transform = "translateX(-100%)"; e.preventDefault(); return;
