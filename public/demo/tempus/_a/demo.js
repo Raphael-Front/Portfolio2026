@@ -51,6 +51,13 @@
     var rot = btn.getAttribute("aria-label") || "";
     if (/^Abrir menu/.test(rot) && dialogo) { dialogo.showModal(); return true; }
     if (rot === "Fechar menu" && dialogo) { dialogo.close(); return true; }
+    // Audit BIM: gaveta escondida com -translate-x-full
+    var gaveta = document.querySelector("[class*='-translate-x-full']") || document.querySelector("[data-demo-gaveta]");
+    if (gaveta && (/^Abrir menu/.test(rot) || rot === "Fechar menu")) {
+      gaveta.setAttribute("data-demo-gaveta", "");
+      gaveta.classList.toggle("-translate-x-full", rot === "Fechar menu");
+      return true;
+    }
     if (rot === "Recolher menu" && lateral && estreita) {
       lateral.style.transform = lateral.style.transform ? "" : "translateX(-100%)";
       return true;

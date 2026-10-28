@@ -23,7 +23,7 @@ export type Case = { key: string; kicker: string; title: string; badge?: string;
 // Levantado dos repositórios em 27/10/2026.
 const CASES: Case[] = [
   {
-    key: "audit", kicker: "GPL Incorporadora · BIM", title: "Audit BIM",
+    key: "audit", kicker: "GPL Incorporadora · BIM", title: "Audit BIM", demo: "/demo/auditbim/index.html",
     ideia: "Auditoria de modelos BIM por disciplina, com checklist, não conformidades rastreadas até a correção e score de qualidade por projeto.",
     dores: ["Auditoria feita em planilha, item a item", "Não conformidade apontada e esquecida, sem vínculo com a correção", "Ninguém sabia o nível de qualidade real de cada projeto"],
     impactos: ["A auditoria saiu da planilha e virou um fluxo guiado", "Cada NC fica ligada à correção no Construflow", "A qualidade do modelo virou um score comparável"],
