@@ -44,7 +44,9 @@ export function Stack({ c, reveal }: { c: Case; reveal?: boolean }) {
       )}
     </ul>
     {c.demo && (
-      <a className="jg-demo" href={c.demo} target="_blank" rel="noopener" title="Demo com dados fictícios">
+      // mesma aba: guarda a rolagem para o "Voltar ao portfólio" da demo cair no mesmo ponto
+      <a className="jg-demo" href={c.demo} title="Demo com dados fictícios"
+        onClick={() => { try { sessionStorage.setItem("jg-volta", String(window.scrollY)); } catch {} }}>
         ▶ VER SISTEMA
       </a>
     )}
@@ -66,6 +68,15 @@ export default function Leitura({ cases, onPlay }: { cases: Case[]; onPlay: () =
     if (h.style.overflow === "") { h.style.overflow = "hidden"; void h.offsetHeight; h.style.overflow = ""; }
   }, [ativa]);
   useEffect(() => () => { document.documentElement.style.removeProperty("--jg-acc"); delete document.documentElement.dataset.jgF; }, []);
+  // voltando de uma demo: rola até onde a pessoa clicou em "VER SISTEMA"
+  useEffect(() => {
+    try {
+      const y = sessionStorage.getItem("jg-volta");
+      if (y === null) return;
+      sessionStorage.removeItem("jg-volta");
+      window.scrollTo({ top: Number(y), behavior: "instant" });
+    } catch {}
+  }, []);
 
   useEffect(() => {
     const el = root.current!;
