@@ -723,7 +723,7 @@ function CaseBody({ c, as: Tag, titleId }: { c: Case; as: "article" | "div"; tit
         <div><h3>Por que existe</h3><ul className="jg-dores">{c.dores.map((d) => <li key={d}>{d}</li>)}</ul></div>
         <div><h3>{c.badge ? "O que vai mudar" : "Impacto"}</h3><ul className="jg-wins">{c.impactos.map((d) => <li key={d}>{d}</li>)}</ul></div>
       </div>
-      <Stack c={c} />
+      <Stack c={{ ...c, demo: undefined }} /> {/* sem demo dentro do jogo: sair dele perderia a partida */}
     </Tag>
   );
 }
