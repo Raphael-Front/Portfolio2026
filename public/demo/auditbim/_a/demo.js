@@ -82,6 +82,9 @@
     [/^laboratorio/, { "Laboratório Cerrado Ensaios Tecnológicos": "laboratorio.html" }],
     [/^equipamentos?-interno/, { "Paquímetro": "equipamento-interno.html" }],
     [/^obra(s|-cadastro)\./, { "Residencial Jardim das Acácias": "obra-cadastro.html" }],
+    // Partietta
+    [/^(descobrir|index)/, { "Por que essa nota?": "descobrir-nota.html" }],
+    [/^solicitacoes/, { "Recebidas (3)": "solicitacoes.html", "Enviadas (2)": "solicitacoes-enviadas.html", "Histórico (4)": "solicitacoes-historico.html" }],
   ];
   function itemDeLista(el) {
     var alvo = el.closest("button, a, li, [role=button], [role=option]");

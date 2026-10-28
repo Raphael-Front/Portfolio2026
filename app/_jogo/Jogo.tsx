@@ -63,7 +63,7 @@ const CASES: Case[] = [
     stackMais: ["HTML/CSS", "Node.js", "GraphQL", "GitHub Pages"],
   },
   {
-    key: "partietta", kicker: "Projeto pessoal · Games", title: "Partietta", badge: "Em desenvolvimento",
+    key: "partietta", kicker: "Projeto pessoal · Games", title: "Partietta", demo: "/demo/partietta/index.html", badge: "Em desenvolvimento",
     ideia: "Plataforma para encontrar parceiros de jogo por compatibilidade explicável: você vê quanto cada critério pesou no match. Para jogadores maiores de 18 anos.",
     dores: ["Achar gente compatível para jogar é pura sorte", "Matchmaking caixa-preta, sem explicar o porquê", "Grupos que não fecham por falta de canal de voz"],
     impactos: ["Match explicado: 9 critérios com pesos que dá para conferir", "Party com call temporária no Discord, criada na hora", "Conexões com moderação e público só de maiores de 18"],
