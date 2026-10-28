@@ -55,7 +55,7 @@ const CASES: Case[] = [
     stackMais: ["React 19", "Tailwind CSS 4", "Vitest", "Docker", "GHCR", "IIS", "GitHub Actions"],
   },
   {
-    key: "hub", kicker: "GPL Incorporadora · DevOps", title: "HUB",
+    key: "hub", kicker: "GPL Incorporadora · DevOps", title: "HUB", demo: "/demo/hub/index.html",
     ideia: "Painel que acompanha todos os repositórios do time: PRs, branches paradas e padrões de CI, com um botão que abre a correção sozinho.",
     dores: ["PRs esquecidas por dias sem review", "Cada repositório com um padrão diferente de CI e release", "Ninguém via o estado do time inteiro numa tela só"],
     impactos: ["O estado de todos os repositórios numa tela só", "Cada PR ganha uma nota de S a D e entra numa fila de review", "Padrão fora do lugar se corrige com um clique, que abre a PR"],

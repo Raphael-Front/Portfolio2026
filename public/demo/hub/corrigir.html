@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>GPL HUB</title>
+  <link rel="icon" href="_a/f82e41907f71.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_a/dcbbd2bfb74f.css">
+<style>*,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;transition:none!important}</style></head>
+<body class="settled">
+  
+
+  <!-- Tela de acesso: o site é público, os dados só aparecem com um token de quem tem acesso aos repos. -->
+  
+
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">GPL<b>HUB</b></span>
+        <span class="sep"></span>
+        <div class="sync">
+          <span class="dot " id="sync-dot"></span>
+          <span id="meta">Sync agora · API 4870</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="btn ghost" id="org-link" target="_blank" rel="noopener" href="https://github.com/demo-org">demo-org<svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"></path></svg></a>
+        <button class="btn" id="refresh" type="button"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4h-4"></path></svg>Atualizar</button>
+        <div class="user" id="user"><img src="_a/99db022cd3a9.png" alt="">
+    <div class="who"><b>Ana Beatriz Demo</b><span>@ana-demo</span></div>
+    <button class="icon-btn" id="logout" type="button" title="Sair e apagar o token deste navegador"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14 4.5H5v15h9M10 12h10M16.5 8.5L20 12l-3.5 3.5"></path></svg></button></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="stats" id="stats"><div class="stat cut" style="--stat-color:var(--cyan)">
+      <div class="k"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 4.5h11.5a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-13zM5 17.5a2 2 0 0 1 2-2h11.5"></path></svg>Repositórios</div>
+      <div class="v">7</div>
+      <div class="f">monitorados em demo-org</div>
+      
+    </div><div class="stat cut" style="--stat-color:var(--acc)">
+      <div class="k"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs abertas</div>
+      <div class="v">14</div>
+      <div class="f">2 abertas há mais de 5 dias</div>
+      
+    </div><div class="stat cut" style="--stat-color:var(--cyan)">
+      <div class="k"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches ativas</div>
+      <div class="v">23</div>
+      <div class="f">fora de main, dev e develop</div>
+      
+    </div><div class="stat cut" style="--stat-color:var(--warn)">
+      <div class="k"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Branches paradas</div>
+      <div class="v">9</div>
+      <div class="f">sem commit há mais de 30 dias</div>
+      <div class="meter"><i style="width:39%"></i></div>
+    </div><div class="stat cut" style="--stat-color:var(--acc)">
+      <div class="k"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 3.5l7 2.5v5.5c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6l7-2.5z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg>No padrão</div>
+      <div class="v">4<small>/7</small></div>
+      <div class="f">todos os checks obrigatórios</div>
+      <div class="meter"><i style="width:57%"></i></div>
+    </div></section>
+
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-view="repos" type="button">Repositórios</button>
+        <button class="tab" data-view="prs" type="button">Pull requests <span class="count" id="tab-prs">14</span></button>
+        <button class="tab" data-view="standards" type="button">Padrões</button>
+      </nav>
+
+      <section class="view" id="view-repos">
+        <div class="toolbar">
+          <div class="filters" id="filters">
+            <button data-filter="all" class="chip active" type="button">Todos</button>
+            <button data-filter="prs" class="chip" type="button">Com PR aberta</button>
+            <button data-filter="noncompliant" class="chip" type="button">Fora do padrão</button>
+            <button data-filter="stale" class="chip" type="button">Branches paradas</button>
+          </div>
+          <div class="toolbar-right">
+            <label class="search">
+              <svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+              <input type="search" id="search" placeholder="Buscar repositório" value="">
+            </label>
+            
+          </div>
+        </div>
+        <div class="cards" id="cards"><button class="card cut" type="button" data-repo="edifica" data-grade="S" style="--i:0">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:85" data-avatar="edifica" data-size=""><span>E</span></span>
+        <div class="card-title">
+          <h3>Edifica</h3>
+          <p>main · push há 17 h</p>
+        </div>
+        <span class="grade " data-grade="S" title="Nota S">S</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>4/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="on" style="animation-delay:120ms"></i><i class="on" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>4</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>7</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class="warn"><b>3</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck ok" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Release</span><span class="ck ok" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck ok" title="Validação do título da PR no padrão Conventional Commits"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>PR Title</span><span class="ck ok" title="Publicação de release no GlitchTip"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="tempus" data-grade="A" style="--i:1">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:160" data-avatar="tempus" data-size=""><span>T</span></span>
+        <div class="card-title">
+          <h3>Tempus</h3>
+          <p>main · push há 12 h</p>
+        </div>
+        <span class="grade " data-grade="A" title="Nota A">A</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>4/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="on" style="animation-delay:120ms"></i><i class="on" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>3</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>4</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class="warn"><b>1</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck ok" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Release</span><span class="ck ok" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck ok" title="Validação do título da PR no padrão Conventional Commits"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>PR Title</span><span class="ck off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="partietta" data-grade="S" style="--i:2">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:190" data-avatar="partietta" data-size=""><span>P</span></span>
+        <div class="card-title">
+          <h3>Partietta</h3>
+          <p>main · push há 1 dia</p>
+        </div>
+        <span class="grade " data-grade="S" title="Nota S">S</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>4/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="on" style="animation-delay:120ms"></i><i class="on" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>3</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>3</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class=""><b>0</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck ok" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Release</span><span class="ck ok" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck ok" title="Validação do título da PR no padrão Conventional Commits"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>PR Title</span><span class="ck ok" title="Publicação de release no GlitchTip"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="databook" data-grade="A" style="--i:3">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:215" data-avatar="databook" data-size=""><span>D</span></span>
+        <div class="card-title">
+          <h3>Databook</h3>
+          <p>main · push há 20 h</p>
+        </div>
+        <span class="grade " data-grade="A" title="Nota A">A</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>4/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="on" style="animation-delay:120ms"></i><i class="on" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>2</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>3</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class="warn"><b>1</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck ok" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Release</span><span class="ck ok" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck ok" title="Validação do título da PR no padrão Conventional Commits"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>PR Title</span><span class="ck off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="portfolio" data-grade="D" style="--i:4">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:160" data-avatar="portfolio" data-size=""><span>P</span></span>
+        <div class="card-title">
+          <h3>Portfólio</h3>
+          <p>main · push há 13 h</p>
+        </div>
+        <span class="grade " data-grade="D" title="Nota D">D</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>1/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="" style="animation-delay:60ms"></i><i class="" style="animation-delay:120ms"></i><i class="" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>1</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>1</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class=""><b>0</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck bad" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Release</span><span class="ck bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Sync dev</span><span class="ck bad" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Discord</span><span class="ck off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>PR Title</span><span class="ck off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="audit-bim" data-grade="B" style="--i:5">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:35" data-avatar="audit-bim" data-size=""><span>A</span></span>
+        <div class="card-title">
+          <h3>Audit BIM</h3>
+          <p>main · push há 23 h</p>
+        </div>
+        <span class="grade " data-grade="B" title="Nota B">B</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>3/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="on" style="animation-delay:120ms"></i><i class="" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class="hot"><b>1</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>5</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class="warn"><b>4</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck ok" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Release</span><span class="ck bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>PR Title</span><span class="ck off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>GlitchTip</span></div>
+    </button><button class="card cut" type="button" data-repo="HUB" data-grade="C" style="--i:6">
+      <div class="card-top">
+        <span class="avatar  letter" style="--h:85" data-avatar="HUB" data-size=""><span>H</span></span>
+        <div class="card-title">
+          <h3>HUB</h3>
+          <p>main · push há 3 h</p>
+        </div>
+        <span class="grade " data-grade="C" title="Nota C">C</span>
+      </div>
+      <div class="hp"><div class="hp-head"><span>Conformidade</span><b>2/4</b></div><div class="hp-bar"><i class="on" style="animation-delay:0ms"></i><i class="on" style="animation-delay:60ms"></i><i class="" style="animation-delay:120ms"></i><i class="" style="animation-delay:180ms"></i></div></div>
+      <div class="card-stats">
+        <div class=""><b>0</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</span></div>
+        <div><b>0</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</span></div>
+        <div class=""><b>0</b><span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5V12l3 2"></path></svg>Paradas</span></div>
+      </div>
+      <div class="checks"><span class="ck ok" title="Workflow de CI rodando em pull_request"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>CI</span><span class="ck bad" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Release</span><span class="ck bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg>Sync dev</span><span class="ck ok" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Discord</span><span class="ck off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>PR Title</span><span class="ck off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg>GlitchTip</span></div>
+    </button></div>
+      </section>
+
+      <section class="view" id="view-prs" hidden="">
+        <div class="panel hud" id="prs"><div class="panel-head"><h2>Fila de pull requests</h2><p class="hint">Mais antigas primeiro. Amarelo: mais de 5 dias. Vermelho: mais de 14.</p></div><div class="pr">
+    <span class="avatar sm letter" style="--h:85" data-avatar="edifica" data-size="sm"><span>E</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#62</span><a class="" href="https://github.com/demo-org/edifica/pull/43" target="_blank" rel="noopener">refactor: separa a camada de permissões</a></div>
+      <div class="pr-meta">
+        <b>Edifica</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">diego-souza</span>
+        <span class="flow"><span class="h">refactor/separa-a-camada-de-permissoes-3</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age old">aberta há 11 dias</span>
+        <span>revisores: lucas-andrade</span>
+      </div>
+    </div>
+    <div class="badges"><span class="badge ok">Aprovada</span><span class="badge info">CI rodando</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:85" data-avatar="edifica" data-size="sm"><span>E</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#55</span><a class="" href="https://github.com/demo-org/edifica/pull/42" target="_blank" rel="noopener">feat: notificação de solicitação pendente</a></div>
+      <div class="pr-meta">
+        <b>Edifica</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">ana-demo</span>
+        <span class="flow"><span class="h">feat/notificacao-de-solicitacao-pendente-2</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age old">aberta há 6 dias</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge mute">Draft</span><span class="badge info">CI rodando</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:160" data-avatar="tempus" data-size="sm"><span>T</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#58</span><a class="" href="https://github.com/demo-org/tempus/pull/42" target="_blank" rel="noopener">feat: notificação de solicitação pendente</a></div>
+      <div class="pr-meta">
+        <b>Tempus</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">lucas-andrade</span>
+        <span class="flow"><span class="h">feat/notificacao-de-solicitacao-pendente-2</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 5 dias</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge mute">Draft</span><span class="badge bad">Ajustes pedidos</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:190" data-avatar="partietta" data-size="sm"><span>P</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#58</span><a class="" href="https://github.com/demo-org/partietta/pull/42" target="_blank" rel="noopener">refactor: separa a camada de permissões</a></div>
+      <div class="pr-meta">
+        <b>Partietta</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">ana-demo</span>
+        <span class="flow"><span class="h">refactor/separa-a-camada-de-permissoes-2</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 4 dias</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge mute">Draft</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:85" data-avatar="edifica" data-size="sm"><span>E</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#51</span><a class="" href="https://github.com/demo-org/edifica/pull/41" target="_blank" rel="noopener">chore: atualiza dependências</a></div>
+      <div class="pr-meta">
+        <b>Edifica</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">ana-demo</span>
+        <span class="flow"><span class="h">chore/atualiza-dependencias-1</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 3 dias</span>
+        <span>revisores: fernanda-r</span>
+      </div>
+    </div>
+    <div class="badges"><span class="badge warn">Aguardando review</span><span class="badge ok">CI ok</span><span class="badge bad">Conflito</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:160" data-avatar="tempus" data-size="sm"><span>T</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#47</span><a class="" href="https://github.com/demo-org/tempus/pull/41" target="_blank" rel="noopener">chore: atualiza dependências</a></div>
+      <div class="pr-meta">
+        <b>Tempus</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">carla-mendes</span>
+        <span class="flow"><span class="h">chore/atualiza-dependencias-1</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 2 dias</span>
+        <span>revisores: carla-mendes</span>
+      </div>
+    </div>
+    <div class="badges"><span class="badge warn">Aguardando review</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:190" data-avatar="partietta" data-size="sm"><span>P</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#41</span><a class="" href="https://github.com/demo-org/partietta/pull/40" target="_blank" rel="noopener">refactor: separa a camada de permissões</a></div>
+      <div class="pr-meta">
+        <b>Partietta</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">fernanda-r</span>
+        <span class="flow"><span class="h">refactor/separa-a-camada-de-permissoes</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 2 dias</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge bad">Ajustes pedidos</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:160" data-avatar="tempus" data-size="sm"><span>T</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#43</span><a class="" href="https://github.com/demo-org/tempus/pull/40" target="_blank" rel="noopener">fix: corrige cálculo de horas extras</a></div>
+      <div class="pr-meta">
+        <b>Tempus</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">carla-mendes</span>
+        <span class="flow"><span class="h">fix/corrige-calculo-de-horas-extras</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 2 dias</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge ok">Aprovada</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:215" data-avatar="databook" data-size="sm"><span>D</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#48</span><a class="" href="https://github.com/demo-org/databook/pull/41" target="_blank" rel="noopener">chore: atualiza dependências</a></div>
+      <div class="pr-meta">
+        <b>Databook</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">diego-souza</span>
+        <span class="flow"><span class="h">chore/atualiza-dependencias-1</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 1 dia</span>
+        <span>revisores: lucas-andrade</span>
+      </div>
+    </div>
+    <div class="badges"><span class="badge warn">Aguardando review</span><span class="badge info">CI rodando</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:190" data-avatar="partietta" data-size="sm"><span>P</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#47</span><a class="" href="https://github.com/demo-org/partietta/pull/41" target="_blank" rel="noopener">chore: atualiza dependências</a></div>
+      <div class="pr-meta">
+        <b>Partietta</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">carla-mendes</span>
+        <span class="flow"><span class="h">chore/atualiza-dependencias-1</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 1 dia</span>
+        <span>revisores: fernanda-r</span>
+      </div>
+    </div>
+    <div class="badges"><span class="badge warn">Aguardando review</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:215" data-avatar="databook" data-size="sm"><span>D</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#42</span><a class="" href="https://github.com/demo-org/databook/pull/40" target="_blank" rel="noopener">feat: tela de onboarding em etapas</a></div>
+      <div class="pr-meta">
+        <b>Databook</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">bruno-lima</span>
+        <span class="flow"><span class="h">feat/tela-de-onboarding-em-etapas</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 1 dia</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge warn">Aguardando review</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:85" data-avatar="edifica" data-size="sm"><span>E</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#40</span><a class="" href="https://github.com/demo-org/edifica/pull/40" target="_blank" rel="noopener">feat: exporta relatório em PDF</a></div>
+      <div class="pr-meta">
+        <b>Edifica</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">bruno-lima</span>
+        <span class="flow"><span class="h">feat/exporta-relatorio-em-pdf</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 14 h</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge bad">Ajustes pedidos</span><span class="badge bad">CI falhou</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:160" data-avatar="portfolio" data-size="sm"><span>P</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#44</span><a class="" href="https://github.com/demo-org/portfolio/pull/40" target="_blank" rel="noopener">feat: notificação de solicitação pendente</a></div>
+      <div class="pr-meta">
+        <b>Portfólio</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">carla-mendes</span>
+        <span class="flow"><span class="h">feat/notificacao-de-solicitacao-pendente</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 14 h</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge ok">Aprovada</span><span class="badge ok">CI ok</span></div>
+  </div><div class="pr">
+    <span class="avatar sm letter" style="--h:35" data-avatar="audit-bim" data-size="sm"><span>A</span></span>
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#42</span><a class="" href="https://github.com/demo-org/audit-bim/pull/40" target="_blank" rel="noopener">refactor: separa a camada de permissões</a></div>
+      <div class="pr-meta">
+        <b>Audit BIM</b>
+        <span><img src="_a/99db022cd3a9.png" alt="">bruno-lima</span>
+        <span class="flow"><span class="h">refactor/separa-a-camada-de-permissoes</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 7 h</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge ok">Aprovada</span><span class="badge ok">CI ok</span></div>
+  </div></div>
+      </section>
+
+      <section class="view" id="view-standards" hidden="">
+        <div class="panel hud">
+          <div class="panel-head">
+            <div>
+              <h2>Matriz de padrões</h2>
+              <p class="hint">Lido dos workflows em <code>.github/workflows</code> da main e da branch padrão. Colunas em itálico são opcionais. Tracejado: já está na dev, chega na main com a próxima release. Amarelo: existe, mas fora do modelo do HUB.</p>
+            </div>
+            <div id="fix-bulk"><button class="btn primary" type="button" data-fix-bulk=""><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir 9 pendências em 3 repos</button></div>
+          </div>
+          <div class="table-wrap"><table class="matrix" id="matrix"><thead><tr><th>Repositório</th><th>Nota</th><th class="" title="Workflow de CI rodando em pull_request">CI</th><th class="" title="Release Please: versionamento e changelog automáticos">Release</th><th class="" title="Sincronização automática da main para dev ou develop">Sync dev</th><th class="" title="Notificação de PR no canal compartilhado do Discord">Discord</th><th class="opt" title="Validação do título da PR no padrão Conventional Commits">PR Title</th><th class="opt" title="Publicação de release no GlitchTip">GlitchTip</th><th>Branch dev</th></tr></thead><tbody><tr data-repo="edifica">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:85" data-avatar="edifica" data-size="sm"><span>E</span></span>Edifica</span></td>
+        <td><span class="grade " data-grade="S" title="Nota S">S</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="release-please.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="sync-main-to-dev.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="discord.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="pr-title.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="glitchtip-release.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="tempus">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:160" data-avatar="tempus" data-size="sm"><span>T</span></span>Tempus</span></td>
+        <td><span class="grade " data-grade="A" title="Nota A">A</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="release-please.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="sync-main-to-dev.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="notify-discord-pr.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="pr-title.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="databook">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:215" data-avatar="databook" data-size="sm"><span>D</span></span>Databook</span></td>
+        <td><span class="grade " data-grade="A" title="Nota A">A</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="release-please.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="sync-main-to-dev.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="notify-discord-pr.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="pr-title.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="audit-bim">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:35" data-avatar="audit-bim" data-size="sm"><span>A</span></span>Audit BIM</span></td>
+        <td><span class="grade " data-grade="B" title="Nota B">B</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="release-please.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell ok" title="notify-discord-pr.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td><td><span class="cell off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="partietta">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:190" data-avatar="partietta" data-size="sm"><span>P</span></span>Partietta</span></td>
+        <td><span class="grade " data-grade="S" title="Nota S">S</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="release-please.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="sync-main-to-dev.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="notify-discord-pr.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="pr-title.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell ok" title="glitchtip-release.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="portfolio">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:160" data-avatar="portfolio" data-size="sm"><span>P</span></span>Portfólio</span></td>
+        <td><span class="grade " data-grade="D" title="Nota D">D</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell bad" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell bad" title="Notificação de PR no canal compartilhado do Discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td><td><span class="cell off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr><tr data-repo="HUB">
+        <td><span class="repo-cell"><span class="avatar sm letter" style="--h:85" data-avatar="HUB" data-size="sm"><span>H</span></span>HUB</span></td>
+        <td><span class="grade " data-grade="C" title="Nota C">C</span></td>
+        <td><span class="cell ok" title="ci.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell bad" title="Release Please: versionamento e changelog automáticos"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell bad" title="Sincronização automática da main para dev ou develop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span></td><td><span class="cell ok" title="notify-discord-pr.yml"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td><td><span class="cell off" title="Validação do título da PR no padrão Conventional Commits (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td><td><span class="cell off" title="Publicação de release no GlitchTip (opcional)"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span></td>
+        <td><span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></td>
+      </tr></tbody></table></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <aside class="drawer open" id="drawer" aria-hidden="false">
+    <div class="drawer-backdrop" data-close=""></div>
+    <div class="drawer-panel" role="dialog" aria-modal="true" id="drawer-panel">
+    <div class="d-head" data-grade="D">
+      <span class="avatar lg letter" style="--h:160" data-avatar="portfolio" data-size="lg"><span>P</span></span>
+      <div><h2>Portfólio</h2><p>Portfólio jogável em pixel art</p></div>
+      <span class="grade lg" data-grade="D" title="Nota D">D</span>
+      <button class="icon-btn" data-close="" type="button" aria-label="Fechar"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    </div>
+    <div class="d-links">
+      <a class="btn primary" href="https://github.com/demo-org/portfolio" target="_blank" rel="noopener"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 4.5h11.5a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-13zM5 17.5a2 2 0 0 1 2-2h11.5"></path></svg>Repositório</a>
+      <a class="btn" href="https://github.com/demo-org/portfolio/pulls" target="_blank" rel="noopener"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>PRs</a>
+      <a class="btn" href="https://github.com/demo-org/portfolio/branches" target="_blank" rel="noopener"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2"></circle><circle cx="6" cy="18.5" r="2.2"></circle><circle cx="18" cy="7.5" r="2.2"></circle><path d="M6 7.7v8.6M18 9.7c0 4.3-12 2.3-12 6.6"></path></svg>Branches</a>
+      <a class="btn" href="https://github.com/demo-org/portfolio/actions" target="_blank" rel="noopener"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg>Actions</a>
+      <a class="btn" href="https://github.com/demo-org/portfolio/tree/main/.github/workflows" target="_blank" rel="noopener"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 4v16M12 4v16M19 4v16"></path><path d="M3 9h4M10 15h4M17 7h4"></path></svg>Workflows</a>
+    </div>
+    <div class="d-body">
+      <section class="d-section"><h3>Padrões <span class="count">1/4</span></h3>
+        <div class="fix-all"><span>4 pendências com correção automática</span><button class="btn mini primary" type="button" data-fix-repo=""><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir tudo numa PR</button></div>
+        
+        <div class="check-list"><div class="check-row cut ">
+        <span class="cell ok"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+        <div><b>CI</b><span><code>ci.yml</code></span></div>
+        
+      </div><div class="check-row cut ">
+        <span class="cell bad"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span>
+        <div><b>Release</b><span>Release Please: versionamento e changelog automáticos</span></div>
+        <div class="check-action"><button class="btn mini" type="button" data-fix="release-please"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir</button></div>
+      </div><div class="check-row cut ">
+        <span class="cell bad"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span>
+        <div><b>Sync dev</b><span>Sincronização automática da main para dev ou develop</span></div>
+        <div class="check-action"><button class="btn mini" type="button" data-fix="sync-to-dev"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir</button></div>
+      </div><div class="check-row cut ">
+        <span class="cell bad"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"></path></svg></span>
+        <div><b>Discord</b><span>Notificação de PR no canal compartilhado do Discord</span></div>
+        <div class="check-action"><button class="btn mini" type="button" data-fix="discord"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir</button></div>
+      </div><div class="check-row cut opt">
+        <span class="cell off"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span>
+        <div><b>PR Title</b><span>Validação do título da PR no padrão Conventional Commits</span></div>
+        <div class="check-action"><button class="btn mini" type="button" data-fix="pr-title"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 1-2-2z"></path><path d="M14.5 6.5l3-3 3 3-3 3"></path></svg>Corrigir</button></div>
+      </div><div class="check-row cut opt">
+        <span class="cell off"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M7 12h10"></path></svg></span>
+        <div><b>GlitchTip</b><span>Publicação de release no GlitchTip</span></div>
+        
+      </div></div>
+      </section>
+      <section class="d-section"><h3>Pull requests <span class="count">1</span></h3>
+        <div class="panel"><div class="pr">
+    
+    <div class="pr-main">
+      <div class="pr-title"><span class="num">#44</span><a class="" href="https://github.com/demo-org/portfolio/pull/40" target="_blank" rel="noopener">feat: notificação de solicitação pendente</a></div>
+      <div class="pr-meta">
+        
+        <span><img src="_a/99db022cd3a9.png" alt="">carla-mendes</span>
+        <span class="flow"><span class="h">feat/notificacao-de-solicitacao-pendente</span><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"></path></svg><span class="b">dev</span></span>
+        <span class="age ">aberta há 14 h</span>
+        
+      </div>
+    </div>
+    <div class="badges"><span class="badge ok">Aprovada</span><span class="badge ok">CI ok</span></div>
+  </div></div>
+      </section>
+      <section class="d-section"><h3>Branches de trabalho <span class="count">1</span></h3>
+        <div class="branch-tools"><button class="chip active" data-bfilter="all" type="button">Todas 1</button><button class="chip " data-bfilter="stale" type="button">Paradas 0</button><button class="chip " data-bfilter="pr" type="button">Com PR</button></div>
+        <div class="branch-list"><div class="branch-item">
+            <a class="" href="https://github.com/demo-org/portfolio/tree/feat/notificacao-de-solicitacao-pendente" target="_blank" rel="noopener">feat/notificacao-de-solicitacao-pendente</a>
+            <span class="who">carla-mendes</span>
+            <span class="when"><span class="badge ok">PR</span>agora</span>
+          </div></div>
+      </section>
+    </div></div>
+  </aside>
+
+  <div class="fix open" id="fix">
+    <div class="fix-backdrop"></div>
+    <div class="fix-panel cut" role="dialog" aria-modal="true" id="fix-panel">
+    <div class="m-head"><span class="avatar sm letter" style="--h:160" data-avatar="portfolio" data-size="sm"><span>P</span></span><div><span class="eyebrow">Corrigir padrão</span><h2>Release, Sync dev, Discord, PR Title em Portfólio</h2></div><button class="icon-btn" type="button" data-fix-close="" aria-label="Fechar"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+    <div class="m-body"><p class="lead">O HUB abre uma pull request com um único commit. Nada vai direto para a branch, o merge continua sendo do time.</p>
+        <dl class="plan">
+          <dt>Base</dt><dd><code>dev</code></dd>
+          <dt>Branch</dt><dd><code>chore/hub-padroes</code></dd>
+          <dt>Título</dt><dd>ci: alinha workflows ao padrão do HUB</dd>
+        </dl>
+        
+        <section class="part">
+    <h4>Release</h4>
+    <details class="yaml"><summary><span>Adiciona</span><code>.github/workflows/release-please.yml</code></summary><pre># gpl-hub:release-please@1
+# Gerado pelo GPL HUB (https://github.com/devGPL/HUB). Ajuste à vontade para o projeto.
+name: Release Please
+
+# A cada merge na main, mantém aberta uma PR de release com versão e changelog.
+# Ao mergear essa PR, a tag e o GitHub Release são criados.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # A branch padrão pode ser dev: sem isto a PR de release nasceria lá.
+          target-branch: main
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+</pre></details><details class="yaml"><summary><span>Adiciona</span><code>release-please-config.json</code></summary><pre>{
+  "pull-request-header": "Release ${version}\n\nAo mergear esta PR, a tag e o GitHub Release são criados. Não edite o corpo: o release-please usa metadados ocultos aqui.",
+  "pull-request-title-pattern": "chore: release ${version}",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "bootstrap-sha": "dd07f3334fdc265750036b355d3c4803bae3eff6",
+      "changelog-sections": [
+        {
+          "type": "feat",
+          "section": "Novidades"
+        },
+        {
+          "type": "fix",
+          "section": "Correções"
+        },
+        {
+          "type": "perf",
+          "section": "Performance"
+        },
+        {
+          "type": "refactor",
+          "section": "Refatoração"
+        },
+        {
+          "type": "chore",
+          "section": "Manutenção"
+        },
+        {
+          "type": "ci",
+          "section": "Manutenção"
+        },
+        {
+          "type": "build",
+          "section": "Manutenção"
+        },
+        {
+          "type": "docs",
+          "section": "Documentação",
+          "hidden": true
+        },
+        {
+          "type": "test",
+          "section": "Testes",
+          "hidden": true
+        },
+        {
+          "type": "style",
+          "section": "Estilo",
+          "hidden": true
+        }
+      ]
+    }
+  }
+}
+</pre></details><details class="yaml"><summary><span>Adiciona</span><code>.release-please-manifest.json</code></summary><pre>{
+  ".": "1.4.0"
+}
+</pre></details>
+    <ul class="notes"><li>Versão inicial 1.4.0, lida do package.json.</li><li>Depois do merge, a cada push na main o release-please mantém uma PR de release aberta. As mensagens de commit precisam seguir o Conventional Commits.</li></ul>
+  </section><section class="part">
+    <h4>Sync dev</h4>
+    <details class="yaml"><summary><span>Adiciona</span><code>.github/workflows/sync-main-to-dev.yml</code></summary><pre># gpl-hub:sync-dev@1
+# Modelo gerenciado pelo GPL HUB (https://github.com/devGPL/HUB). Mudanças aqui devem ir para o modelo.
+name: Sync main to dev
+
+# Toda vez que algo entra na main (merge da release, hotfix), leva para a branch de
+# integração (dev ou develop). Usa `push` e não `release: published` porque releases
+# criadas pelo GITHUB_TOKEN do release-please não disparam outros workflows.
+#
+# Ordem de tentativa: fast-forward, merge comum e, se houver conflito ou a branch
+# estiver protegida, abre uma PR para resolver na mão.
+#
+# Requer em Settings &gt; Actions &gt; General: "Allow GitHub Actions to create and approve pull requests".
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-main-to-dev
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Descobrir a branch de integração
+        id: target
+        run: |
+          for b in dev develop; do
+            if git ls-remote --exit-code --heads origin "$b" &gt; /dev/null; then
+              echo "branch=$b" &gt;&gt; "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "Nenhuma branch dev ou develop encontrada; nada para sincronizar."
+          echo "branch=" &gt;&gt; "$GITHUB_OUTPUT"
+
+      - name: Sincronizar
+        if: steps.target.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET: ${{ steps.target.outputs.branch }}
+        run: |
+          set -u
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main "$TARGET"
+
+          if git merge-base --is-ancestor origin/main "origin/$TARGET"; then
+            echo "$TARGET já contém a main."
+            exit 0
+          fi
+
+          git checkout -B "$TARGET" "origin/$TARGET"
+
+          if git merge --ff-only origin/main &amp;&amp; git push origin "$TARGET"; then
+            echo "Fast-forward aplicado."
+            exit 0
+          fi
+
+          git reset --hard "origin/$TARGET"
+          if git merge --no-ff origin/main -m "chore: sync main to $TARGET" &amp;&amp; git push origin "$TARGET"; then
+            echo "Merge aplicado."
+            exit 0
+          fi
+
+          echo "Não deu para aplicar direto; abrindo PR."
+          git merge --abort 2&gt;/dev/null || true
+          BRANCH="chore/sync-main-to-$TARGET"
+          git checkout -B "$BRANCH" origin/main
+          git push --force origin "$BRANCH"
+
+          if gh pr list --head "$BRANCH" --base "$TARGET" --state open --json number --jq 'length' | grep -q '^0$'; then
+            gh pr create --base "$TARGET" --head "$BRANCH" \
+              --title "chore: sync main to $TARGET" \
+              --body "Sync automático da \`main\` para \`$TARGET\`. O merge direto falhou (conflito ou branch protegida); resolva e faça o merge."
+          fi
+</pre></details>
+    <ul class="notes"><li>Em Settings &gt; Actions &gt; General, habilite "Allow GitHub Actions to create and approve pull requests" para o workflow conseguir abrir PR quando houver conflito.</li></ul>
+  </section><section class="part">
+    <h4>Discord</h4>
+    <details class="yaml"><summary><span>Adiciona</span><code>.github/workflows/notify-discord-pr.yml</code></summary><pre># gpl-hub:discord-pr@1
+# Modelo gerenciado pelo GPL HUB (https://github.com/devGPL/HUB). Mudanças aqui devem ir para o modelo.
+name: Notifica PR no Discord
+
+# Avisa o PO no canal compartilhado quando uma PR fica pronta para revisão.
+# O nome do repositório vai em destaque e cada repo tem uma cor fixa, para dar
+# para saber de onde veio a PR sem abrir o link.
+#
+# Configuração no próprio repositório (no plano Free, secrets da organização não chegam a repos privados):
+#   - Secret   DISCORD_WEBHOOK_URL : webhook do canal de notificação
+#   - Variable DISCORD_PO_USER_ID  : ID do usuário do PO no Discord, para a menção
+#                                    (DISCORD_PO_ID também é aceito, nome antigo do DataBook)
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.draft == false }}
+    steps:
+      - name: Postar no Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PO_ID: ${{ vars.DISCORD_PO_USER_ID || vars.DISCORD_PO_ID }}
+          REPO: ${{ github.event.repository.name }}
+          REPO_URL: ${{ github.event.repository.html_url }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          TITLE: ${{ github.event.pull_request.title }}
+          URL: ${{ github.event.pull_request.html_url }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          AVATAR: ${{ github.event.pull_request.user.avatar_url }}
+          BASE: ${{ github.event.pull_request.base.ref }}
+          HEAD: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "DISCORD_WEBHOOK_URL não configurado; pulando notificação."
+            exit 0
+          fi
+
+          MENTION=""
+          if [ -n "$PO_ID" ]; then MENTION="&lt;@$PO_ID&gt; "; fi
+
+          # Cor fixa por repositório, escolhida pelo hash do nome.
+          PALETTE=(3066993 3447003 15105570 15277667 1752220 16776960 10181046 15548997 2067276 12745742)
+          HASH=$(printf '%s' "$REPO" | cksum | cut -d' ' -f1)
+          COLOR=${PALETTE[$((HASH % ${#PALETTE[@]}))]}
+
+          jq -n \
+            --arg content "${MENTION}nova PR em **${REPO}** para revisar" \
+            --arg repo "$REPO" \
+            --arg repo_url "$REPO_URL" \
+            --arg title "#${NUMBER} ${TITLE}" \
+            --arg url "$URL" \
+            --arg author "$AUTHOR" \
+            --arg avatar "$AVATAR" \
+            --arg branch "${HEAD} → ${BASE}" \
+            --argjson color "$COLOR" \
+            '{
+              content: $content,
+              allowed_mentions: { parse: ["users"] },
+              embeds: [{
+                author: { name: $repo, url: $repo_url },
+                title: $title,
+                url: $url,
+                color: $color,
+                thumbnail: { url: $avatar },
+                fields: [
+                  { name: "Autor", value: $author, inline: true },
+                  { name: "Branch", value: $branch, inline: true }
+                ]
+              }]
+            }' \
+            | curl -sf -H "Content-Type: application/json" -d @- "$WEBHOOK"
+</pre></details>
+    <ul class="notes"><li>O workflow lê o secret DISCORD_WEBHOOK_URL e a variável DISCORD_PO_USER_ID, configurados no próprio repositório (no plano Free, os da organização não chegam a repos privados). Sem eles, o workflow só pula a notificação.</li></ul>
+  </section><section class="part">
+    <h4>PR Title</h4>
+    <details class="yaml"><summary><span>Adiciona</span><code>.github/workflows/pr-title.yml</code></summary><pre># gpl-hub:pr-title@1
+# Modelo gerenciado pelo GPL HUB (https://github.com/devGPL/HUB). Mudanças aqui devem ir para o modelo.
+name: PR Title
+
+# Garante que o título da PR siga o Conventional Commits (feat:, fix:, chore: ...),
+# que é o que o release-please usa para montar versão e changelog.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+</pre></details>
+    
+  </section></div>
+    <div class="m-foot"><button class="btn ghost" type="button" data-fix-close="">Cancelar</button><button class="btn primary" type="button" id="fix-go"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="6" cy="6" r="2.2"></circle><circle cx="6" cy="18" r="2.2"></circle><circle cx="18" cy="18" r="2.2"></circle><path d="M6 8.2v7.6M18 15.8V9a3 3 0 0 0-3-3h-4M13 3.5L10.5 6 13 8.5"></path></svg>Abrir PR</button></div></div>
+  </div>
+
+  
+
+  <div class="fix" id="cleanup">
+    <div class="fix-backdrop"></div>
+    <div class="fix-panel cut" role="dialog" aria-modal="true" id="cleanup-panel"></div>
+  </div>
+
+  <div class="toast" id="toast" hidden=""></div>
+  
+
+
+<div id="demo-banner" style="position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:2147483647;display:flex;gap:12px;align-items:center;background:#0b1222;color:#e8edf6;border:2px solid #f2c230;box-shadow:4px 4px 0 #05080f;padding:8px 14px;font:600 13px/1.3 'Segoe UI',system-ui,sans-serif;white-space:nowrap">
+<span style="color:#f2c230;font:800 11px ui-monospace,Consolas,monospace;letter-spacing:.12em">DEMO</span><span>Dados fictícios · navegação entre módulos ativa</span>
+<a href="/" style="color:#3ad1e6;font-weight:800;text-decoration:none">← Voltar ao portfólio</a></div><script src="_a/demo.js"></script></body></html>

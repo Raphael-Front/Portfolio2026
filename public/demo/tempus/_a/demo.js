@@ -97,7 +97,22 @@
     return null;
   }
 
+  // HUB: abas, cards de repositório e painéis viram páginas capturadas
+  function destinoHub(el) {
+    var v = el.closest("button[data-view]");
+    if (v) return { repos: "index.html", prs: "pull-requests.html", standards: "padroes.html" }[v.getAttribute("data-view")];
+    var r = el.closest("button.card[data-repo], tr[data-repo]");
+    if (r) return "repo-" + r.getAttribute("data-repo").toLowerCase() + ".html";
+    if (el.closest("[data-fix-bulk]")) return "corrigir-lote.html";
+    if (el.closest("[data-fix-repo], [data-fix]")) return "corrigir.html";
+    if (el.closest("[data-cleanup]")) return "limpeza.html";
+    if (el.closest("[data-fix-close], [data-cleanup-close], .fix-backdrop, #drawer .icon-btn, .drawer-backdrop")) return "index.html";
+    return null;
+  }
+
   document.addEventListener("click", function (e) {
+    var hub = document.getElementById("tabs") && destinoHub(e.target);
+    if (hub) { e.preventDefault(); ir(hub); return; }
     var item = itemDeLista(e.target);
     if (item) { e.preventDefault(); ir(item); return; }
     // menu aberto no celular: tocar fora dele fecha
