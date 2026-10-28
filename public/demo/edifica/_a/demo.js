@@ -69,6 +69,28 @@
   if (faixa && window.innerWidth < 600) {
     faixa.children[1] && faixa.children[1].remove();
     faixa.style.whiteSpace = "nowrap"; faixa.style.fontSize = "12px";
+    // barra de navegação fixa no rodapé (Partietta): a faixa fica acima dela
+    var barra = [].slice.call(document.querySelectorAll("nav, footer, div")).filter(function (el) {
+      if (el === faixa || faixa.contains(el)) return false;
+      var cs = getComputedStyle(el), r = el.getBoundingClientRect();
+      return cs.position === "fixed" && r.bottom >= innerHeight - 2 && r.height > 40 && r.height < 120 && r.width > innerWidth * 0.8;
+    })[0];
+    if (barra) faixa.style.bottom = barra.getBoundingClientRect().height + 10 + "px";
+  }
+  // celular: nada alarga a página para os lados (carrosséis e tabelas rolam no próprio lugar)
+  if (window.innerWidth < 600) {
+    document.documentElement.style.overflowX = "hidden";
+    document.body.style.overflowX = "hidden";
+    var matriz = document.getElementById("matrix");
+    if (matriz) { matriz.style.overflowX = "auto"; matriz.style.maxWidth = "100%"; }
+    // linhas (carrossel de sugestões etc.) que passam da tela voltam a rolar no próprio lugar
+    [].slice.call(document.querySelectorAll("body div, body ul, body section")).forEach(function (el) {
+      var cs = getComputedStyle(el);
+      if (cs.position === "fixed" || cs.overflowX !== "visible") return;
+      if ((cs.display === "flex" && cs.flexDirection.indexOf("row") === 0) || cs.display === "grid") {
+        if (el.scrollWidth > el.clientWidth + 8 && el.getBoundingClientRect().width <= innerWidth + 2) el.style.overflowX = "auto";
+      }
+    });
   }
 
   // Databook: itens das listas abrem o painel de detalhe capturado
